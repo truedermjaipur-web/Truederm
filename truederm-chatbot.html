@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Truederm Chatbot</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Variables ── */
+  :root {
+    --navy: #1a2332;
+    --navy-light: #243044;
+    --gold: #C9A96E;
+    --gold-light: #e8d5b0;
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --gray-light: #f3f1ed;
+    --border: rgba(201,169,110,0.2);
+    --shadow: 0 8px 40px rgba(26,35,50,0.18);
+    --radius: 20px;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: transparent;
+  }
+
+  /* ── Floating Trigger Button ── */
+  #td-trigger {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2.5px solid var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    z-index: 9999;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  #td-trigger:hover { transform: scale(1.07); box-shadow: 0 12px 50px rgba(26,35,50,0.28); }
+  #td-trigger svg { width: 28px; height: 28px; }
+  #td-trigger .close-icon { display: none; }
+  #td-trigger.open .chat-icon { display: none; }
+  #td-trigger.open .close-icon { display: block; }
+
+  /* Notification badge */
+  #td-badge {
+    position: fixed;
+    bottom: 80px;
+    right: 28px;
+    background: var(--navy);
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    z-index: 9998;
+    white-space: nowrap;
+    animation: fadeIn 0.5s ease 2s both;
+    font-family: var(--font-sans);
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Chat Window ── */
+  #td-chat {
+    position: fixed;
+    bottom: 108px;
+    right: 28px;
+    width: 380px;
+    max-height: 620px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 0.5px solid var(--border);
+    display: none;
+    flex-direction: column;
+    z-index: 9997;
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  #td-chat.open { display: flex; }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+  /* Header */
+  .td-header {
+    background: var(--navy);
+    padding: 16px 18px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .td-header-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    color: var(--navy);
+    font-family: var(--font-serif);
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+  .td-header-info { flex: 1; }
+  .td-header-name {
+    font-size: 14px; font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.3px;
+  }
+  .td-header-sub {
+    font-size: 11px; color: var(--gold);
+    display: flex; align-items: center; gap: 5px;
+    margin-top: 2px;
+  }
+  .td-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; }
+
+  /* Powered badge */
+  .td-powered {
+    font-size: 9.5px;
+    color: rgba(201,169,110,0.6);
+    margin-left: auto;
+    letter-spacing: 0.3px;
+  }
+
+  /* Messages area */
+  .td-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--cream);
+    scroll-behavior: smooth;
+  }
+  .td-messages::-webkit-scrollbar { width: 3px; }
+  .td-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .td-timestamp {
+    text-align: center;
+    font-size: 10px;
+    color: var(--gray);
+    margin: 4px 0;
+  }
+
+  /* Bubbles */
+  .td-msg { display: flex; gap: 8px; align-items: flex-end; }
+  .td-msg.bot { align-self: flex-start; max-width: 92%; }
+  .td-msg.user { align-self: flex-end; flex-direction: row-reverse; max-width: 88%; }
+
+  .td-bot-avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; color: var(--gold);
+    font-weight: 700; flex-shrink: 0;
+    font-family: var(--font-serif);
+    margin-bottom: 2px;
+  }
+
+  .td-bubble {
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    font-family: var(--font-sans);
+  }
+  .td-msg.bot .td-bubble {
+    background: var(--white);
+    color: var(--navy);
+    border-bottom-left-radius: 4px;
+    border: 0.5px solid var(--border);
+  }
+  .td-msg.user .td-bubble {
+    background: var(--navy);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Chips / Quick questions */
+  .td-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+    padding-left: 34px;
+  }
+  .td-chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--navy);
+    font-size: 11.5px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all 0.15s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .td-chip:hover { background: var(--gold); color: var(--white); }
+
+  /* Typing indicator */
+  .td-typing .td-bubble {
+    display: flex; gap: 4px; align-items: center;
+    padding: 12px 16px;
+  }
+  .td-typing .td-dot-ani {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: tdBounce 1.1s infinite;
+  }
+  .td-typing .td-dot-ani:nth-child(2) { animation-delay: 0.18s; }
+  .td-typing .td-dot-ani:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes tdBounce {
+    0%,60%,100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  /* Lead capture form */
+  .td-lead-form {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-sans);
+  }
+  .td-lead-form p {
+    font-size: 12.5px;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .td-lead-form input {
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-family: var(--font-sans);
+    color: var(--navy);
+    background: var(--cream);
+    outline: none;
+    width: 100%;
+  }
+  .td-lead-form input:focus { border-color: var(--gold); }
+  .td-lead-form select {
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-family: var(--font-sans);
+    color: var(--navy);
+    background: var(--cream);
+    outline: none;
+    width: 100%;
+  }
+  .td-lead-form select:focus { border-color: var(--gold); }
+  .td-submit-btn {
+    background: var(--navy);
+    color: var(--gold);
+    border: none;
+    border-radius: 8px;
+    padding: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    letter-spacing: 0.3px;
+    transition: background 0.15s;
+  }
+  .td-submit-btn:hover { background: var(--gold); color: var(--navy); }
+
+  /* Input bar */
+  .td-input-bar {
+    padding: 10px 12px;
+    background: var(--white);
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .td-input-bar input {
+    flex: 1;
+    border: 0.5px solid var(--border);
+    border-radius: 22px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-family: var(--font-sans);
+    background: var(--cream);
+    color: var(--navy);
+    outline: none;
+  }
+  .td-input-bar input:focus { border-color: var(--gold); }
+  .td-send-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .td-send-btn:hover { background: var(--gold); }
+  .td-send-btn svg { width: 16px; height: 16px; fill: white; }
+
+  /* Admin panel (leads table) */
+  #td-admin {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26,35,50,0.85);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #td-admin.open { display: flex; }
+  .admin-box {
+    background: var(--white);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 760px;
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .admin-header {
+    background: var(--navy);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .admin-header h2 {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-sans);
+  }
+  .admin-close {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--font-sans);
+  }
+  .admin-body {
+    overflow-y: auto;
+    padding: 20px;
+    flex: 1;
+  }
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    border: 0.5px solid var(--border);
+  }
+  .stat-card .stat-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    font-family: var(--font-serif);
+  }
+  .stat-card .stat-label {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 3px;
+  }
+  .leads-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    font-family: var(--font-sans);
+  }
+  .leads-table th {
+    background: var(--navy);
+    color: var(--gold);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .leads-table td {
+    padding: 10px 12px;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--navy);
+    vertical-align: top;
+  }
+  .leads-table tr:hover td { background: var(--cream); }
+  .service-badge {
+    background: rgba(201,169,110,0.15);
+    color: var(--navy);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    border: 0.5px solid var(--gold);
+    display: inline-block;
+  }
+  .no-leads {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray);
+    font-size: 13px;
+  }
+  .admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .btn-export {
+    background: var(--navy);
+    color: var(--gold);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 12.5px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  .btn-clear {
+    background: transparent;
+    color: #dc2626;
+    border: 1px solid #dc2626;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 12.5px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+  }
+  .btn-export:hover { background: var(--gold); color: var(--navy); }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    #td-chat { width: calc(100vw - 24px); right: 12px; bottom: 90px; }
+    #td-trigger { right: 16px; bottom: 16px; }
+    #td-badge { right: 16px; bottom: 90px; }
+    .admin-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Notification badge -->
+<div id="td-badge">💬 How can I help you today?</div>
+
+<!-- Floating trigger -->
+<button id="td-trigger" onclick="toggleChat()" aria-label="Open Truederm Chat">
+  <svg class="chat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#C9A96E"/>
+    <path d="M7 9H17M7 13H13" stroke="#1a2332" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <svg class="close-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 6L6 18M6 6L18 18" stroke="#C9A96E" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<!-- Chat window -->
+<div id="td-chat">
+  <!-- Header -->
+  <div class="td-header">
+    <div class="td-header-avatar">Td</div>
+    <div class="td-header-info">
+      <div class="td-header-name">Truederm Assistant</div>
+      <div class="td-header-sub"><span class="td-dot"></span> Dr. Iftekhar Khan's Clinic</div>
+    </div>
+    <div class="td-powered">AI Powered</div>
+  </div>
+
+  <!-- Messages -->
+  <div class="td-messages" id="td-messages">
+    <div class="td-timestamp">Today</div>
+    <div class="td-msg bot" id="welcome-msg">
+      <div class="td-bot-avatar">Td</div>
+      <div>
+        <div class="td-bubble">
+          Hello! 👋 Welcome to <strong>Truederm Jaipur</strong> — the premium skin, hair &amp; aesthetic clinic of Dr. Iftekhar Khan (MBBS MD Dermatology, AIIMS Delhi).<br><br>I can help you with information about our treatments, book a free consultation, and answer any skin or hair questions.<br><br>What can I help you with today?
+        </div>
+      </div>
+    </div>
+    <div class="td-chips" id="welcome-chips">
+      <button class="td-chip" onclick="chipClick('Tell me about hair transplant options')">💆 Hair Transplant</button>
+      <button class="td-chip" onclick="chipClick('How do you treat acne and pigmentation?')">✨ Acne &amp; Pigmentation</button>
+      <button class="td-chip" onclick="chipClick('What laser treatments are available?')">⚡ Laser Treatment</button>
+      <button class="td-chip" onclick="chipClick('Tell me about Botox and aesthetic treatments')">💉 Botox &amp; Aesthetics</button>
+      <button class="td-chip" onclick="chipClick('I want to book a consultation')">📅 Book Appointment</button>
+      <button class="td-chip" onclick="chipClick('What are the clinic timings and address?')">📍 Clinic Info</button>
+      <button class="td-chip" onclick="chipClick('Who is Dr. Iftekhar Khan?')">👨‍⚕️ About Dr. Khan</button>
+    </div>
+  </div>
+
+  <!-- Input bar -->
+  <div class="td-input-bar">
+    <input type="text" id="td-input" placeholder="Type your question here..." onkeydown="if(event.key==='Enter') sendUserMsg()" autocomplete="off" />
+    <button class="td-send-btn" onclick="sendUserMsg()" aria-label="Send">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div id="td-admin">
+  <div class="admin-box">
+    <div class="admin-header">
+      <h2>Truederm — Leads Dashboard</h2>
+      <button class="admin-close" onclick="toggleAdmin()">Close</button>
+    </div>
+    <div class="admin-body" id="admin-body">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Config ── */
+const CLINIC = {
+  name: "Truederm Jaipur",
+  doctor: "Dr. Iftekhar Khan",
+  credentials: "MBBS MD Dermatology, AIIMS Delhi",
+  phone: "+91 70422 17716",
+  whatsapp: "https://wa.me/917042217716",
+  email: "truederm.jaipur@gmail.com",
+  address: "Bhagadiya Bhawan, J-26 (First Floor), Subhash Marg, C-Scheme, Ashok Nagar, Jaipur – 302001",
+  hours: "Monday to Saturday: 11 AM – 7 PM",
+  instagram: "https://instagram.com/truederm.jaipur"
+};
+
+const SYSTEM_PROMPT = `You are the friendly and professional AI assistant for Truederm Jaipur, the premium dermatology clinic of Dr. Iftekhar Khan (MBBS MD Dermatology, AIIMS Delhi).
+
+CLINIC DETAILS:
+- Address: Bhagadiya Bhawan, J-26 (First Floor), Subhash Marg, C-Scheme, Ashok Nagar, Jaipur 302001
+- Phone: +91 70422 17716
+- WhatsApp: wa.me/917042217716
+- Email: truederm.jaipur@gmail.com
+- Hours: Monday to Saturday, 11 AM to 7 PM (Closed on Sundays)
+- Instagram: @truederm.jaipur
+
+ABOUT DR. IFTEKHAR KHAN:
+Dr. Iftekhar Khan is an AIIMS Delhi trained dermatologist with an MD in Dermatology. He specialises in hair transplant surgery (FUE and DHT), cosmetic dermatology, and laser treatments. His clinic Truederm is known for evidence-based, personalised treatment protocols using the latest technology.
+
+SERVICES:
+
+1. HAIR TRANSPLANT (Primary Specialty):
+   - FUE (Follicular Unit Extraction): Minimally invasive. Individual follicles extracted and implanted. No linear scar. Natural results. Best for mild to moderate hair loss (Norwood Grade 2-4).
+   - DHT (Direct Hair Transplant): Advanced FUE variant. Grafts planted directly without separate slit creation. Higher density, faster healing, ultra-natural hairline.
+   - Free consultation includes: Norwood grading, donor area assessment, graft count estimation.
+   - Results: Visible from 3-4 months. Permanent full results by 10-12 months.
+
+2. ACNE AND ACNE SCAR TREATMENT:
+   - All grades: comedonal, papulopustular, nodular, cystic acne
+   - Treatments: chemical peels, comedone extraction, prescription protocols
+   - Scar treatments: Fractional CO2 laser, microneedling, subcision, TCA CROSS, dermal fillers
+
+3. PIGMENTATION AND MELASMA:
+   - Melasma, post-inflammatory hyperpigmentation, sun spots, uneven skin tone
+   - Treatments: Q-switched Nd:YAG laser toning, chemical peels, glutathione therapy, depigmentation protocols
+
+4. LASER TREATMENTS:
+   - Laser hair removal: All body areas, 6-8 sessions typically
+   - Fractional CO2 laser: Scars, wrinkles, skin texture
+   - Carbon laser peel (Hollywood Peel): Deep cleansing, pore reduction, instant glow, zero downtime
+   - LLLT: For hair fall stimulation
+
+5. BOTOX AND AESTHETIC INJECTABLES:
+   - Botox: Forehead lines, frown lines, crow feet, brow lift, lip flip, jaw slimming, hyperhidrosis
+   - Dermal Fillers: Lip augmentation, nasolabial folds, under-eye hollows, cheek augmentation, jawline definition
+   - PRP: Hair regrowth, skin rejuvenation, under-eye dark circles
+
+6. ANTI-AGEING AND SKIN REJUVENATION:
+   - HydraFacial and medical facials
+   - Microneedling and collagen induction therapy
+   - Chemical peels for skin renewal and brightening
+
+7. GENERAL DERMATOLOGY:
+   - Eczema, psoriasis, rosacea, seborrheic dermatitis
+   - Hair fall (androgenetic alopecia, telogen effluvium), dandruff
+   - Fungal infections, warts, moles, skin tags removal
+
+RESPONSE RULES:
+1. Always respond in clear, warm, professional English only.
+2. Keep responses concise — 3 to 5 sentences ideal. Use bullet points only when listing multiple items.
+3. Never diagnose medical conditions or prescribe medications.
+4. For specific treatment recommendations say: "Dr. Khan will personally assess this during your consultation."
+5. For pricing questions say: "Treatment costs are personalised based on individual assessment — we will discuss all options transparently in your free consultation." Never give specific prices.
+6. Always end booking-related messages with the phone number or WhatsApp link.
+7. Be empathetic and reassuring — many patients are worried about hair loss or skin conditions.
+8. When the user clearly wants to book an appointment or consultation, output [SHOW_LEAD_FORM] at the end of your message.
+
+APPOINTMENT TRIGGER:
+When user says they want to book, schedule, consult, or visit — respond warmly and end with exactly: [SHOW_LEAD_FORM]`;
+
+let conversationHistory = [];
+let leads = JSON.parse(localStorage.getItem('td_leads') || '[]');
+let formSubmitting = false;
+let chatOpen = false;
+let badgeDismissed = false;
+
+/* ── Toggle Chat ── */
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const chat = document.getElementById('td-chat');
+  const btn = document.getElementById('td-trigger');
+  const badge = document.getElementById('td-badge');
+  if (chatOpen) {
+    chat.classList.add('open');
+    btn.classList.add('open');
+    if (!badgeDismissed) { badge.style.display = 'none'; badgeDismissed = true; }
+  } else {
+    chat.classList.remove('open');
+    btn.classList.remove('open');
+  }
+}
+
+/* ── Chip click ── */
+function chipClick(text) {
+  // remove chips after first use
+  const chips = document.getElementById('welcome-chips');
+  if (chips) chips.remove();
+  appendMsg('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+  getAIReply(text);
+}
+
+/* ── Send user message ── */
+function sendUserMsg() {
+  const input = document.getElementById('td-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  appendMsg('user', text);
+  conversationHistory.push({ role: 'user', content: text });
+  getAIReply(text);
+}
+
+/* ── Fetch AI reply ── */
+async function getAIReply(userText) {
+  showTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        system: SYSTEM_PROMPT,
+        messages: conversationHistory
+      })
+    });
+    const data = await res.json();
+    let reply = (data.content && data.content[0] && data.content[0].text) || fallbackReply(userText);
+    conversationHistory.push({ role: 'assistant', content: reply });
+    hideTyping();
+    if (reply.includes('[SHOW_LEAD_FORM]')) {
+      const cleanReply = reply.replace('[SHOW_LEAD_FORM]', '').trim();
+      if (cleanReply) appendMsg('bot', cleanReply);
+      showLeadForm();
+    } else {
+      appendMsg('bot', reply);
+    }
+  } catch (e) {
+    hideTyping();
+    appendMsg('bot', fallbackReply(userText));
+  }
+}
+
+function fallbackReply(text) {
+  const t = text.toLowerCase();
+  if (t.includes('hair') || t.includes('transplant')) return 'Dr. Khan specialises in FUE and DHT hair transplant techniques — both delivering permanent, natural-looking results. For a free consultation, WhatsApp us: +91 70422 17716 📱';
+  if (t.includes('acne') || t.includes('pimple')) return 'Dr. Khan specialises in acne and acne scar treatment using medical-grade peels, laser, and proven protocols. To book a consultation, call: +91 70422 17716';
+  if (t.includes('book') || t.includes('appointment') || t.includes('consultation')) return 'To book an appointment, WhatsApp us 💬 wa.me/917042217716 or call +91 70422 17716 — Monday to Saturday, 11 AM to 7 PM.';
+  if (t.includes('price') || t.includes('cost') || t.includes('kitna')) return 'Treatment costs are personalised based on your individual assessment. Dr. Khan will discuss all options transparently in your free consultation. WhatsApp: +91 70422 17716';
+  return 'Thank you for reaching out! For the fastest response, contact us directly: 📞 +91 70422 17716 or 💬 wa.me/917042217716 (Mon–Sat, 11 AM–7 PM)';
+}
+
+/* ── Lead form ── */
+function showLeadForm() {
+  const wrap = document.createElement('div');
+  wrap.className = 'td-msg bot';
+  wrap.id = 'lead-form-wrap';
+  wrap.innerHTML = `
+    <div class="td-bot-avatar">Td</div>
+    <div>
+      <div class="td-lead-form" id="td-lead-form">
+        <p>📋 Book Your Free Consultation</p>
+        <input type="text" id="lf-name" placeholder="Your Full Name *" required />
+        <input type="tel" id="lf-phone" placeholder="Phone Number *" required />
+        <select id="lf-service">
+          <option value="">-- Select Treatment of Interest --</option>
+          <option value="Hair Transplant (FUE)">Hair Transplant – FUE</option>
+          <option value="Hair Transplant (DHT)">Hair Transplant – DHT</option>
+          <option value="Acne Treatment">Acne Treatment</option>
+          <option value="Acne Scar Treatment">Acne Scar Treatment</option>
+          <option value="Pigmentation / Melasma">Pigmentation / Melasma</option>
+          <option value="Laser Treatment">Laser Treatment</option>
+          <option value="Botox">Botox</option>
+          <option value="Dermal Fillers">Dermal Fillers</option>
+          <option value="PRP Therapy">PRP Therapy</option>
+          <option value="Anti-Ageing">Anti-Ageing / Skin Rejuvenation</option>
+          <option value="General Dermatology">General Dermatology</option>
+          <option value="Other">Other / Not Sure</option>
+        </select>
+        <input type="text" id="lf-concern" placeholder="Describe your concern briefly (optional)" />
+        <button class="td-submit-btn" onclick="submitLead()">✅ Request Free Consultation</button>
+      </div>
+    </div>`;
+  document.getElementById('td-messages').appendChild(wrap);
+  scrollBottom();
+}
+
+function submitLead() {
+  const name = document.getElementById('lf-name').value.trim();
+  const phone = document.getElementById('lf-phone').value.trim();
+  const service = document.getElementById('lf-service').value;
+  const concern = document.getElementById('lf-concern').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number to continue.'); return; }
+
+  // Save locally
+  const lead = {
+    id: Date.now(), name, phone,
+    service: service || 'Not specified',
+    concern: concern || '—',
+    time: new Date().toLocaleString('en-IN')
+  };
+  leads.push(lead);
+  localStorage.setItem('td_leads', JSON.stringify(leads));
+
+  // Build WhatsApp message with all details
+  const waLines = [
+    '🔔 *New Consultation Request — Truederm*',
+    '',
+    '👤 *Name:* ' + name,
+    '📞 *Phone:* ' + phone,
+    '💊 *Treatment:* ' + (service || 'Not specified'),
+    concern ? '📝 *Concern:* ' + concern : '',
+    '🕐 *Time:* ' + new Date().toLocaleString('en-IN'),
+    '',
+    '_Sent via Truederm Website Chatbot_'
+  ].filter(l => l !== null);
+
+  const waMsg = waLines.join('\n');
+  const waURL = 'https://wa.me/917042217716?text=' + encodeURIComponent(waMsg);
+  window.open(waURL, '_blank');
+
+  // Show thank you in form
+  document.getElementById('td-lead-form').innerHTML =
+    '<p style="color:#1a2332;font-size:13px;font-weight:500;line-height:1.7;">' +
+    '✅ Thank you, <strong>' + name + '</strong>! Your details have been sent to Dr. Khan\'s team via WhatsApp.<br><br>' +
+    'They will call you at <strong>' + phone + '</strong> shortly to confirm your appointment.<br><br>' +
+    'You can also reach us directly: <a href="https://wa.me/917042217716" target="_blank" style="color:#C9A96E;font-weight:600;">+91 70422 17716</a>' +
+    '</p>';
+
+  conversationHistory.push({ role: 'assistant', content: 'Details sent to clinic for ' + name + ' at ' + phone + '.' });
+  formActive = false;
+  setTimeout(() => {
+    appendMsg('bot', 'We look forward to welcoming you at Truederm, ' + name + '! 🙏 Is there anything else I can help you with?');
+  }, 700);
+  scrollBottom();
+}
+
+/* ── Append message ── */
+function appendMsg(role, text) {
+  const area = document.getElementById('td-messages');
+  const wrap = document.createElement('div');
+  wrap.className = 'td-msg ' + role;
+  const formatted = text.replace(/\n/g, '<br>').replace(/\[SHOW_LEAD_FORM\]/g, '');
+  if (role === 'bot') {
+    wrap.innerHTML = `<div class="td-bot-avatar">Td</div><div class="td-bubble">${formatted}</div>`;
+  } else {
+    wrap.innerHTML = `<div class="td-bubble">${formatted}</div>`;
+  }
+  area.appendChild(wrap);
+  scrollBottom();
+}
+
+/* ── Typing indicator ── */
+let typingEl = null;
+function showTyping() {
+  const area = document.getElementById('td-messages');
+  typingEl = document.createElement('div');
+  typingEl.className = 'td-msg bot td-typing';
+  typingEl.innerHTML = `<div class="td-bot-avatar">Td</div><div class="td-bubble"><div class="td-dot-ani"></div><div class="td-dot-ani"></div><div class="td-dot-ani"></div></div>`;
+  area.appendChild(typingEl);
+  scrollBottom();
+}
+function hideTyping() { if (typingEl) { typingEl.remove(); typingEl = null; } }
+function scrollBottom() {
+  const area = document.getElementById('td-messages');
+  setTimeout(() => { area.scrollTop = area.scrollHeight; }, 60);
+}
+
+/* ── Admin panel ── */
+function toggleAdmin() {
+  const panel = document.getElementById('td-admin');
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+  } else {
+    renderAdmin();
+    panel.classList.add('open');
+  }
+}
+
+function renderAdmin() {
+  const body = document.getElementById('admin-body');
+  const total = leads.length;
+  const today = leads.filter(l => new Date(l.id).toDateString() === new Date().toDateString()).length;
+  const services = {};
+  leads.forEach(l => { services[l.service] = (services[l.service] || 0) + 1; });
+  const topService = Object.entries(services).sort((a,b) => b[1]-a[1])[0];
+
+  let rows = leads.length === 0
+    ? '<tr><td colspan="6" class="no-leads">No leads yet. They will appear here once visitors use the chatbot.</td></tr>'
+    : [...leads].reverse().map(l => `
+      <tr>
+        <td><strong>${l.name}</strong></td>
+        <td><a href="tel:${l.phone}" style="color:#1a2332;text-decoration:none;">${l.phone}</a></td>
+        <td><span class="service-badge">${l.service}</span></td>
+        <td style="max-width:140px;font-size:11.5px;">${l.concern}</td>
+        <td style="font-size:11px;color:#6b7280;">${l.time}</td>
+        <td><a href="https://wa.me/91${l.phone.replace(/\D/g,'')}" target="_blank" style="color:#C9A96E;font-size:11.5px;font-weight:600;">WhatsApp</a></td>
+      </tr>`).join('');
+
+  body.innerHTML = `
+    <div class="admin-stats">
+      <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">Total Leads</div></div>
+      <div class="stat-card"><div class="stat-num">${today}</div><div class="stat-label">Today's Leads</div></div>
+      <div class="stat-card"><div class="stat-num" style="font-size:15px;">${topService ? topService[0] : '—'}</div><div class="stat-label">Top Service</div></div>
+    </div>
+    <table class="leads-table">
+      <thead><tr><th>Name</th><th>Phone</th><th>Treatment</th><th>Concern</th><th>Time</th><th>Action</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="admin-actions">
+      <button class="btn-export" onclick="exportCSV()">📥 CSV Download</button>
+      <button class="btn-clear" onclick="clearLeads()">🗑 Clear All</button>
+    </div>`;
+}
+
+function exportCSV() {
+  if (leads.length === 0) { alert('No leads to export yet.'); return; }
+  const header = ['Name','Phone','Service','Concern','Time'];
+  const rows = leads.map(l => [l.name, l.phone, l.service, l.concern, l.time].map(v => '"' + String(v).replace(/"/g,'""') + '"').join(','));
+  const csv = [header.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  a.download = 'truederm_leads_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function clearLeads() {
+  if (!confirm('Delete all leads? This cannot be undone.')) return;
+  leads = []; localStorage.removeItem('td_leads');
+  renderAdmin();
+}
+
+/* ── Secret admin shortcut: click bottom-right corner 5 times ── */
+let adminTaps = 0;
+document.addEventListener('click', function(e) {
+  if (e.clientX > window.innerWidth - 60 && e.clientY > window.innerHeight - 60 && e.target.id !== 'td-trigger') {
+    adminTaps++;
+    if (adminTaps >= 5) { adminTaps = 0; toggleAdmin(); }
+  } else { adminTaps = 0; }
+});
+
+/* ── Hide badge on scroll or after 8s ── */
+setTimeout(() => {
+  const b = document.getElementById('td-badge');
+  if (b) b.style.opacity = '0';
+  setTimeout(() => { if (b) b.style.display = 'none'; }, 500);
+}, 8000);
+</script>
+</body>
+</html>
