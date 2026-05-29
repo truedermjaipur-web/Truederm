@@ -1586,9 +1586,13 @@ function sendWA(){
     });
   });
 })();
-
-
-
+</script>
+<script>
+  var iframe = document.createElement('iframe');
+  iframe.src = 'truederm-chatbot.html';
+  iframe.style.cssText = 'position:fixed;bottom:0;right:0;width:450px;height:750px;border:none;z-index:99999;background:transparent;pointer-events:all;';
+  iframe.scrolling = 'no';
+  document.body.appendChild(iframe);
 </script>
 </body>
 </html>
