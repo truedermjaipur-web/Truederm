@@ -1731,18 +1731,10 @@ img,video,svg{max-width:100%;height:auto;}
    <div class="fu">
     <div class="map-box">
      <!-- Interactive Google Map -->
-     <a href="https://www.google.com/maps/place/Truederm+Jaipur/@26.9074,75.7946,17z" target="_blank" style="display:block;position:relative;">
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center=26.9074,75.7946&zoom=16&size=800x360&scale=2&markers=color:red%7Clabel:T%7C26.9074,75.7946&style=feature:all|saturation:-20&key=AIzaSyD-placeholder" 
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-           style="width:100%;height:360px;object-fit:cover;display:block;" alt="Truederm Jaipur Location"/>
-      <!-- Fallback map UI -->
-      <div style="display:none;width:100%;height:360px;background:linear-gradient(135deg,#0d5a63,#1a8a9a);align-items:center;justify-content:center;flex-direction:column;gap:16px;color:#fff;cursor:pointer;">
-       <div style="font-size:56px;">📍</div>
-       <div style="font-family:var(--hf);font-size:22px;font-weight:700;">Truederm Jaipur</div>
-       <div style="font-size:14px;opacity:0.85;text-align:center;padding:0 24px;">Bhagadiya Bhawan, J-26, First Floor<br>Subhash Marg, C-Scheme, Jaipur</div>
-       <div style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);padding:10px 24px;border-radius:50px;font-size:13px;font-weight:600;margin-top:4px;">🗺️ Open in Google Maps</div>
-      </div>
-     </a>
+     <iframe
+      src="https://www.google.com/maps?q=Truederm+Jaipur+Bhagadiya+Bhawan+J-26+Subhash+Marg+C-Scheme+Ashok+Nagar+Jaipur&output=embed"
+      width="100%" height="360" style="border:0;display:block" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade" title="Truederm Jaipur Location Map"></iframe>
      <!-- Full Address below map -->
      <div style="background:#fff;padding:20px 24px;border-top:1px solid var(--bo);">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;flex-wrap:wrap;">
@@ -1783,6 +1775,55 @@ img,video,svg{max-width:100%;height:auto;}
       </div>
      </div>
     </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<style>
+@media(max-width:768px){
+  #delhi-branch .wrap > div{grid-template-columns:1fr!important;gap:28px!important}
+  #delhi-branch iframe{height:240px!important}
+}
+</style>
+
+<!-- DELHI BRANCH -->
+<section id="delhi-branch" style="background:linear-gradient(150deg,var(--tdeep),var(--td));padding:64px 0;position:relative;overflow:hidden">
+ <div style="position:absolute;top:-70px;right:-50px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.28),transparent 70%);filter:blur(6px)"></div>
+ <div style="position:absolute;bottom:-90px;left:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.10),transparent 70%);filter:blur(6px)"></div>
+ <div class="wrap" style="position:relative;z-index:1">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center">
+   <div>
+    <div class="lbl" style="color:rgba(255,255,255,0.65)"><span>Now In The Capital</span></div>
+    <h2 class="ttl" style="color:#fff;font-size:clamp(26px,3.4vw,38px)">Truederm Delhi</h2>
+    <p style="color:rgba(255,255,255,0.78);font-size:15px;line-height:1.8;max-width:480px;margin-bottom:22px">Same trusted Truederm standard of care, now in Lajpat Nagar, New Delhi — led by <b style="color:#fff">Dr. Rajat</b>.</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:26px">
+     <div style="display:flex;gap:12px;align-items:flex-start">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:grid;place-items:center;font-size:16px;flex-shrink:0;border:1px solid rgba(255,255,255,0.2)">📍</div>
+      <div style="font-size:13.5px;color:#fff;line-height:1.7;padding-top:6px">Third Floor, A-10, above Café Coffee Day, Block A, Lajpat Nagar II, New Delhi – 110024</div>
+     </div>
+     <div style="display:flex;gap:12px;align-items:center">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:grid;place-items:center;font-size:16px;flex-shrink:0;border:1px solid rgba(255,255,255,0.2)">📞</div>
+      <a href="tel:+919311646433" style="font-size:13.5px;color:#fff;font-weight:600">093116 46433</a>
+     </div>
+     <div style="display:flex;gap:12px;align-items:center">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,0.12);border-radius:10px;display:grid;place-items:center;font-size:16px;flex-shrink:0;border:1px solid rgba(255,255,255,0.2)">👨‍⚕️</div>
+      <div style="font-size:13.5px;color:#fff;font-weight:600">Dr. Rajat</div>
+     </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+     <a href="https://www.truederm.in/" target="_blank" class="btn bp" style="padding:13px 26px">🌐 Visit Truederm Delhi</a>
+     <a href="https://wa.me/919311646433" target="_blank" class="btn bw" style="padding:13px 26px">💬 WhatsApp Delhi Clinic</a>
+    </div>
+   </div>
+
+   <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.18)">
+    <iframe
+     src="https://www.google.com/maps?q=Truederm+by+Dr+Rajat+A-10+Lajpat+Nagar+II+New+Delhi+110024&output=embed"
+     width="100%" height="360" style="border:0;display:block" allowfullscreen="" loading="lazy"
+     referrerpolicy="no-referrer-when-downgrade" title="Truederm Delhi Location Map"></iframe>
    </div>
   </div>
  </div>
