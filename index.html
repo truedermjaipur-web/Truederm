@@ -419,9 +419,9 @@ nav.sc{box-shadow:0 4px 20px rgba(0,0,0,0.07)}
 .atag{position:absolute;bottom:-16px;right:-12px;background:linear-gradient(135deg,var(--t),var(--td));color:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 8px 28px rgba(42,172,184,0.32)}
 .atag strong{display:block;font-family:var(--hf);font-size:26px;line-height:1}
 .atag span{font-size:12px;opacity:.9}
-.aname{font-family:var(--hf);font-size:44px;font-weight:700;margin-bottom:4px}
-.adeg{font-size:15px;color:var(--t);font-weight:600;margin-bottom:6px}
-.aaiims{display:inline-flex;align-items:center;gap:6px;background:var(--tl);color:var(--tdeep);padding:8px 18px;border-radius:50px;font-size:16px;font-weight:700;margin-bottom:20px;border:1px solid var(--tm)}
+.aname{font-family:var(--hf);font-size:48px;font-weight:700;margin-bottom:4px}
+.adeg{font-size:16px;color:var(--t);font-weight:700;margin-bottom:8px}
+.aaiims{display:inline-flex;align-items:center;gap:6px;background:var(--tl);color:var(--tdeep);padding:10px 22px;border-radius:50px;font-size:19px;font-weight:700;margin-bottom:20px;border:1px solid var(--tm)}
 .abio{font-size:15px;color:var(--mu);line-height:1.85;margin-bottom:28px}
 .apts{display:flex;flex-direction:column;gap:14px}
 .apt{display:flex;align-items:flex-start;gap:14px}
@@ -757,7 +757,7 @@ section:not(#hero):not(.sbar)::before{content:'';position:absolute;top:0;left:50
 
 /* About section doctor image frame */
 .aimg{position:relative;}
-.aimg::after{content:'';position:absolute;inset:-8px;border-radius:28px;background:linear-gradient(135deg,var(--t),var(--td),#e83e8c);padding:3px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:0;pointer-events:none;}
+.aimg::after{content:'';position:absolute;inset:-10px;border-radius:30px;background:linear-gradient(135deg,var(--t),var(--td),#e83e8c);padding:5px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:0;pointer-events:none;box-shadow:0 8px 28px rgba(42,172,184,0.35);}
 
 /* Apt (expertise) cards */
 .apt{background:linear-gradient(135deg,var(--tl),#fff)!important;border-left:3px solid var(--t)!important;border-radius:14px!important;padding:18px 20px!important;}
@@ -860,7 +860,7 @@ nav a.active{color:var(--t)!important;font-weight:600!important;}
 @media(max-width:768px){
   .ag{grid-template-columns:1fr!important;gap:32px!important;}
   .aimg img{max-height:320px;object-fit:cover;border-radius:20px;}
-  .aname{font-size:32px!important;}
+  .aname{font-size:34px!important;}
   .abio{font-size:14px!important;}
   .apts{grid-template-columns:1fr!important;}
 }
@@ -1013,7 +1013,7 @@ img,video,svg{max-width:100%;height:auto;}
   <a href="#hero" class="nlogo">
    <img src="images/logo-nav.png" alt="Truederm"/>
    <div>
-    <div class="nn">truederm. <span>by Dr. Iftekhar Khan</span></div>
+    <div class="nn">truederm. <span>by <strong>Dr. Iftekhar Khan</strong></span></div>
     <div class="nsb">Skin &nbsp;·&nbsp; Hair &nbsp;·&nbsp; Laser &nbsp;·&nbsp; Aesthetics</div>
    </div>
   </a>
@@ -1064,7 +1064,7 @@ img,video,svg{max-width:100%;height:auto;}
     <div class="htx">
      <div class="htag">💆 Hair Transplant Specialist</div>
      <h1 class="hh">Get Your Hair Back<br><em>Permanently</em></h1>
-     <p class="hp">Advanced FUE & DHT Hair Transplant by AIIMS trained dermatologist Dr. Iftekhar Khan. Natural hairline, permanent results.</p>
+     <p class="hp">Advanced FUE & DHT Hair Transplant by AIIMS trained dermatologist <strong>Dr. Iftekhar Khan</strong>. Natural hairline, permanent results.</p>
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Free Consultation</a><a href="https://wa.me/918890030202" class="btn bw" target="_blank">💬 WhatsApp Now</a></div>
      <div class="htrust"><span class="htb">🎓 <b>AIIMS</b> Trained</span><span class="htb">⭐ <b>4.9</b> Rating</span><span class="htb">✅ <b>100%</b> Natural Results</span></div>
     </div>
@@ -1125,7 +1125,7 @@ img,video,svg{max-width:100%;height:auto;}
     <div class="htx">
      <div class="htag">✦ Truederm Jaipur</div>
      <h2 class="hh">Healthy Skin Starts<br><em>Right Here</em></h2>
-     <p class="hp">Expert dermatology by Dr. Iftekhar Khan — MBBS, MD Dermatology, AIIMS Delhi. Right diagnosis, real results.</p>
+     <p class="hp">Expert dermatology by <strong>Dr. Iftekhar Khan</strong> — MBBS, MD Dermatology, AIIMS Delhi. Right diagnosis, real results.</p>
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Appointment</a><a href="https://wa.me/918890030202" class="btn bw" target="_blank">💬 WhatsApp Now</a></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
@@ -1192,7 +1192,7 @@ img,video,svg{max-width:100%;height:auto;}
    <div class="fu">
     <div class="lbl">Our Specialty</div>
     <h2 class="ttl" style="font-size:clamp(30px,4vw,46px)">Hair Transplant<br>by Dr. Iftekhar Khan</h2>
-    <p style="font-size:15px;color:var(--mu);line-height:1.85;margin-bottom:28px">Hair loss affects confidence. At Truederm, we offer advanced hair transplant procedures using the latest techniques — FUE (Follicular Unit Extraction) & DHT (Direct Hair Transplant) — to give you a permanent, natural-looking hairline.<br><br>Dr. Iftekhar Khan, trained at AIIMS Delhi, personally performs every procedure with utmost precision and care.</p>
+    <p style="font-size:15px;color:var(--mu);line-height:1.85;margin-bottom:28px">Hair loss affects confidence. At Truederm, we offer advanced hair transplant procedures using the latest techniques — FUE (Follicular Unit Extraction) & DHT (Direct Hair Transplant) — to give you a permanent, natural-looking hairline.<br><br><strong>Dr. Iftekhar Khan</strong>, trained at AIIMS Delhi, personally performs every procedure with utmost precision and care.</p>
     
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px">
      <div style="background:var(--tl);border-radius:14px;padding:20px;border:1px solid var(--tm)" class="fu">
@@ -1229,7 +1229,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-start;gap:14px">
        <div style="width:36px;height:36px;min-width:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:grid;place-items:center;font-size:18px">✅</div>
-       <div><div style="font-weight:600;font-size:15px;margin-bottom:3px">AIIMS Trained Surgeon</div><div style="font-size:13px;opacity:.85">Dr. Iftekhar Khan personally performs every procedure</div></div>
+       <div><div style="font-weight:600;font-size:15px;margin-bottom:3px">AIIMS Trained Surgeon</div><div style="font-size:13px;opacity:.85"><strong>Dr. Iftekhar Khan</strong> personally performs every procedure</div></div>
       </div>
       <div style="display:flex;align-items:flex-start;gap:14px">
        <div style="width:36px;height:36px;min-width:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:grid;place-items:center;font-size:18px">✅</div>
@@ -1602,7 +1602,7 @@ img,video,svg{max-width:100%;height:auto;}
   <div class="cx">
    <div class="lbl" style="justify-content:center">🎉 Grand Opening</div>
    <h2 class="ttl">Inauguration Memories</h2>
-   <p class="sub" style="margin:0 auto">Glimpses from the grand opening of Truederm Jaipur - Dr. Iftekhar Khan's premium skin, hair &amp; aesthetic clinic. Thank you to everyone who made the day special.</p>
+   <p class="sub" style="margin:0 auto">Glimpses from the grand opening of Truederm Jaipur - <strong>Dr. Iftekhar Khan</strong>'s premium skin, hair &amp; aesthetic clinic. Thank you to everyone who made the day special.</p>
   </div>
   <div class="gal-grid" id="galGrid">
    <div class="gal-item" data-i="0"><img src="images/gallery-inauguration-1.jpg" alt="Truederm inauguration - ribbon cutting moment" loading="lazy" decoding="async"></div>
@@ -1699,7 +1699,7 @@ img,video,svg{max-width:100%;height:auto;}
   <div class="cx" style="margin-bottom:44px">
    <div class="lbl"><span>From The Clinic</span></div>
    <h2 class="ttl">Truederm Blog</h2>
-   <p class="sub">Skin, hair &amp; laser guidance from Dr. Iftekhar Khan — myths busted, treatments explained, and honest answers to the questions patients ask most.</p>
+   <p class="sub">Skin, hair &amp; laser guidance from <strong>Dr. Iftekhar Khan</strong> — myths busted, treatments explained, and honest answers to the questions patients ask most.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
    <a href="blog-fue-vs-dht-hair-transplant.html" class="svc" style="display:block;text-decoration:none;color:inherit">
@@ -1890,12 +1890,12 @@ img,video,svg{max-width:100%;height:auto;}
   <div class="ftg">
    <div>
     <div class="ftlo"><img src="images/logo-footer.png" alt="Truederm" loading="lazy" decoding="async"/><span class="ftbn">Truederm Jaipur</span></div>
-    <p class="ftp">Advanced dermatology clinic offering expert skin, hair, laser & aesthetic treatments by Dr. Iftekhar Khan, MBBS MD Dermatology, AIIMS Delhi.</p>
+    <p class="ftp">Advanced dermatology clinic offering expert skin, hair, laser & aesthetic treatments by <strong>Dr. Iftekhar Khan</strong>, MBBS MD Dermatology, AIIMS Delhi.</p>
    </div>
    <div><div class="fth">Quick Links</div><ul class="ftul"><li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#hairtransplant">Hair Transplant</a></li><li><a href="#results">Results</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="#appointment">Book</a></li><li><a href="#contact">Contact</a></li></ul></div><div><div class="fth">Our Services</div><ul class="ftul"><li><a href="acne-pigmentation-treatment-jaipur.html">Acne &amp; Pigmentation Treatment</a></li><li><a href="hair-transplant-jaipur.html">Hair Transplant (FUE &amp; DHT)</a></li><li><a href="botox-anti-ageing-jaipur.html">Botox &amp; Anti-Ageing</a></li><li><a href="laser-treatment-jaipur.html">Laser Treatment</a></li><li><a href="about-dr-iftekhar-khan.html">About Dr. Iftekhar Khan</a></li><li><a href="contact.html">Directions &amp; Contact Info</a></li></ul></div>
    <div><div class="fth">Contact</div><ul class="ftul"><li><a href="tel:+918890030202">+91 88900 30202</a></li><li><a href="tel:+918890070202">+91 88900 70202</a></li><li><a href="mailto:truederm.jaipur@gmail.com">truederm.jaipur@gmail.com</a></li><li><a href="https://instagram.com/truederm.jaipur" target="_blank">@truederm.jaipur</a></li><li style="color:rgba(255,255,255,0.4);font-size:12px;line-height:1.7">Mon–Sat: 11AM–7PM</li></ul></div>
   </div>
-  <div class="ftbot"><p>© 2025 Truederm Jaipur. All rights reserved.</p><p>Made with ❤️ for Dr. Iftekhar Khan</p></div>
+  <div class="ftbot"><p>© 2025 Truederm Jaipur. All rights reserved.</p><p>Made with ❤️ for <strong>Dr. Iftekhar Khan</strong></p></div>
  </div>
 </footer>
 
