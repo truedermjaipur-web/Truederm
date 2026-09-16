@@ -414,14 +414,14 @@ nav.sc{box-shadow:0 4px 20px rgba(0,0,0,0.07)}
 #about{background:#fff}
 .ag{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 .aiw{position:relative}
-.aimg{border-radius:24px;overflow:hidden;box-shadow:var(--shl)}
-.aimg img{width:100%;height:500px;object-fit:cover;object-position:top center}
+.aimg{border-radius:24px;box-shadow:var(--shl)}
+.aimg img{width:100%;height:500px;object-fit:cover;object-position:top center;border-radius:24px}
 .atag{position:absolute;bottom:-16px;right:-12px;background:linear-gradient(135deg,var(--t),var(--td));color:#fff;border-radius:16px;padding:18px 24px;box-shadow:0 8px 28px rgba(42,172,184,0.32)}
 .atag strong{display:block;font-family:var(--hf);font-size:26px;line-height:1}
 .atag span{font-size:12px;opacity:.9}
-.aname{font-family:var(--hf);font-size:38px;font-weight:700;margin-bottom:4px}
+.aname{font-family:var(--hf);font-size:44px;font-weight:700;margin-bottom:4px}
 .adeg{font-size:15px;color:var(--t);font-weight:600;margin-bottom:6px}
-.aaiims{display:inline-flex;align-items:center;gap:6px;background:var(--tl);color:var(--tdeep);padding:6px 14px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:20px;border:1px solid var(--tm)}
+.aaiims{display:inline-flex;align-items:center;gap:6px;background:var(--tl);color:var(--tdeep);padding:8px 18px;border-radius:50px;font-size:16px;font-weight:700;margin-bottom:20px;border:1px solid var(--tm)}
 .abio{font-size:15px;color:var(--mu);line-height:1.85;margin-bottom:28px}
 .apts{display:flex;flex-direction:column;gap:14px}
 .apt{display:flex;align-items:flex-start;gap:14px}
@@ -757,7 +757,7 @@ section:not(#hero):not(.sbar)::before{content:'';position:absolute;top:0;left:50
 
 /* About section doctor image frame */
 .aimg{position:relative;}
-.aimg::after{content:'';position:absolute;inset:-8px;border-radius:24px;background:linear-gradient(135deg,var(--t),var(--td),#e83e8c);padding:3px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1;}
+.aimg::after{content:'';position:absolute;inset:-8px;border-radius:28px;background:linear-gradient(135deg,var(--t),var(--td),#e83e8c);padding:3px;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:0;pointer-events:none;}
 
 /* Apt (expertise) cards */
 .apt{background:linear-gradient(135deg,var(--tl),#fff)!important;border-left:3px solid var(--t)!important;border-radius:14px!important;padding:18px 20px!important;}
@@ -860,7 +860,7 @@ nav a.active{color:var(--t)!important;font-weight:600!important;}
 @media(max-width:768px){
   .ag{grid-template-columns:1fr!important;gap:32px!important;}
   .aimg img{max-height:320px;object-fit:cover;border-radius:20px;}
-  .aname{font-size:28px!important;}
+  .aname{font-size:32px!important;}
   .abio{font-size:14px!important;}
   .apts{grid-template-columns:1fr!important;}
 }
