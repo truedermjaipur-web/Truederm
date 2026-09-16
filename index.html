@@ -510,7 +510,7 @@ nav.sc{box-shadow:0 4px 20px rgba(0,0,0,0.07)}
 .citx a,.citx span{font-size:13px;color:var(--mu);line-height:1.6}
 .citx a{color:var(--t)}
 .apform{background:#fff;border-radius:22px;padding:32px;box-shadow:var(--shl);border:1px solid var(--bo)}
-.apft{font-family:var(--hf);font-size:24px;font-weight:700;margin-bottom:22px}
+.apft{font-family:var(--hf);font-size:24px;font-weight:700;margin-bottom:18px}.aptabs{display:flex;gap:8px;background:var(--off);padding:5px;border-radius:13px;margin-bottom:22px;border:1px solid var(--bo)}.aptab{flex:1;padding:11px 8px;border:none;background:transparent;border-radius:9px;font-family:var(--bf);font-size:13px;font-weight:700;color:var(--mu);cursor:pointer;transition:all .2s}.aptab.active{background:linear-gradient(135deg,var(--t),var(--td));color:#fff;box-shadow:0 6px 16px rgba(42,172,184,0.3)}
 .fg{margin-bottom:16px}
 .fg label{display:block;font-size:11px;font-weight:600;color:var(--tx);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
 .fg input,.fg select,.fg textarea{width:100%;padding:12px 15px;border:1.5px solid var(--bo);border-radius:11px;font-family:var(--bf);font-size:14px;color:var(--tx);background:var(--off);outline:none;transition:border-color .2s}
@@ -1736,7 +1736,7 @@ img,video,svg{max-width:100%;height:auto;}
    <div class="fu">
     <div class="lbl">Book Now</div>
     <h2 class="apth">Book Your Consultation</h2>
-    <p class="aptp">Take the first step towards healthier skin. Fill the form and we'll confirm via WhatsApp or call.</p>
+    <p class="aptp">Take the first step towards healthier skin. Fill the form and we'll confirm via WhatsApp or call. Can't visit the clinic? Choose <strong>Online Consult</strong> below and pick a slot that works for you — video or phone, your choice.</p>
     <div class="ci"><div class="ciic">📞</div><div class="citx"><strong>Call Us</strong><a href="tel:+918890030202">+91 88900 30202</a><a href="tel:+918890070202">+91 88900 70202</a></div></div>
     <div class="ci"><div class="ciic">💬</div><div class="citx"><strong>WhatsApp</strong><a href="https://wa.me/918890030202" target="_blank">Chat directly</a></div></div>
     <div class="ci"><div class="ciic">📧</div><div class="citx"><strong>Email</strong><a href="mailto:truederm.jaipur@gmail.com">truederm.jaipur@gmail.com</a></div></div>
@@ -1745,10 +1745,10 @@ img,video,svg{max-width:100%;height:auto;}
    </div>
    <div class="fu">
     <div class="apform">
-     <div class="apft">Request an Appointment</div>
+     <div class="apft" id="apftTitle">Request an Appointment</div><div class="aptabs"><button type="button" class="aptab active" id="tabClinic" onclick="setApMode('clinic')">🏥 Visit Clinic</button><button type="button" class="aptab" id="tabOnline" onclick="setApMode('online')">💻 Online Consult</button></div>
      <div class="fg"><label>Full Name *</label><input type="text" id="fn" placeholder="Your full name"/></div>
      <div class="fg"><label>Phone *</label><input type="tel" id="fp" placeholder="+91 XXXXX XXXXX"/></div>
-     <div class="fg"><label>Preferred Date</label><input type="date" id="fd"/></div>
+     <div class="fg"><label>Preferred Date</label><input type="date" id="fd"/></div><div class="fg" id="slotGroup" style="display:none"><label>Preferred Time Slot *</label><select id="fs"><option value="">Select a time slot</option><option>11:00 AM – 12:00 PM</option><option>12:00 PM – 1:00 PM</option><option>1:00 PM – 2:00 PM</option><option>2:00 PM – 3:00 PM</option><option>4:00 PM – 5:00 PM</option><option>5:00 PM – 6:00 PM</option><option>6:00 PM – 7:00 PM</option></select></div><div class="fg" id="modeGroup" style="display:none"><label>Consultation Mode</label><select id="fcm"><option>Video Call (WhatsApp)</option><option>Phone Call</option></select></div>
      <div class="fg"><label>Concern *</label>
       <select id="fc">
        <option value="">Select your concern</option>
@@ -1760,7 +1760,7 @@ img,video,svg{max-width:100%;height:auto;}
       </select>
      </div>
      <div class="fg"><label>Message (Optional)</label><textarea id="fm" rows="3" placeholder="Tell us more about your concern..."></textarea></div>
-     <button class="btn bw" style="width:100%;justify-content:center;margin-bottom:10px" onclick="sendWA()">💬 Send via WhatsApp</button>
+     <button class="btn bw" id="apSubmitBtn" style="width:100%;justify-content:center;margin-bottom:10px" onclick="sendWA()">💬 Send via WhatsApp</button>
      <p style="font-size:12px;color:var(--mu);text-align:center">📞 Or call: <a href="tel:+918890030202" style="color:var(--t);font-weight:600">+91 88900 30202</a> / <a href="tel:+918890070202" style="color:var(--t);font-weight:600">88900 70202</a></p>
     </div>
    </div>
@@ -1961,21 +1961,45 @@ document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 })();
 
 // WHATSAPP FORM
+  let apMode='clinic';
+  function setApMode(mode){
+     apMode=mode;
+   document.getElementById('tabClinic').classList.toggle('active',mode==='clinic');
+   document.getElementById('tabOnline').classList.toggle('active',mode==='online');
+   document.getElementById('slotGroup').style.display=mode==='online'?'block':'none';
+     document.getElementById('modeGroup').style.display=mode==='online'?'block':'none';
+     document.getElementById('apftTitle').textContent=mode==='online'?'Book an Online Consultation':'Request an Appointment';
+     document.getElementById('apSubmitBtn').innerHTML=mode==='online'?'💻 Book Online Consult via WhatsApp':'💬 Send via WhatsApp';
+  }
 function sendWA(){
- const n=document.getElementById('fn').value.trim();
- const p=document.getElementById('fp').value.trim();
- const d=document.getElementById('fd').value;
- const c=document.getElementById('fc').value;
- const m=document.getElementById('fm').value.trim();
- if(!n){alert('Please enter your name');return;}
- if(!p){alert('Please enter your phone number');return;}
- if(!c){alert('Please select your concern');return;}
- let txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
- txt+=`*Name:* ${n}%0A*Phone:* ${p}%0A`;
- if(d)txt+=`*Date:* ${d}%0A`;
- txt+=`*Concern:* ${c}%0A`;
- if(m)txt+=`*Message:* ${m}`;
- window.open(`https://wa.me/918890030202?text=${txt}`,'_blank');
+  const n=document.getElementById('fn').value.trim();
+   const p=document.getElementById('fp').value.trim();
+   const d=document.getElementById('fd').value;
+   const c=document.getElementById('fc').value;
+   const m=document.getElementById('fm').value.trim();
+   if(!n){alert('Please enter your name');return;}
+   if(!p){alert('Please enter your phone number');return;}
+   if(!c){alert('Please select your concern');return;}
+   const en=encodeURIComponent(n), ep=encodeURIComponent(p), em=encodeURIComponent(m), ec=encodeURIComponent(c);
+   let txt;
+   if(apMode==='online'){
+       const s=document.getElementById('fs').value;
+       const cm=document.getElementById('fcm').value;
+       if(!s){alert('Please select a preferred time slot');return;}
+    txt=`Hello Truederm! I want to book an *ONLINE CONSULTATION*.%0A%0A`;
+       txt+=`*Name:* ${en}%0A*Phone:* ${ep}%0A`;
+       if(d)txt+=`*Date:* ${d}%0A`;
+       txt+=`*Time Slot:* ${encodeURIComponent(s)}%0A*Mode:* ${encodeURIComponent(cm)}%0A`;
+       txt+=`*Concern:* ${ec}%0A`;
+       if(m)txt+=`*Message:* ${em}`;
+   }else{
+       txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
+       txt+=`*Name:* ${en}%0A*Phone:* ${ep}%0A`;
+       if(d)txt+=`*Date:* ${d}%0A`;
+       txt+=`*Concern:* ${ec}%0A`;
+       if(m)txt+=`*Message:* ${em}`;
+  }
+   window.open(`https://wa.me/918890030202?text=${txt}`,'_blank');
 }
 
 // ===== SCROLL REVEAL =====
