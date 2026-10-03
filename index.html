@@ -240,8 +240,9 @@
 }
 </script>
 <meta name="description" content="Dermatologist in C-Scheme, Jaipur. AIIMS-trained Dr. Iftekhar Khan treats acne, pigmentation, hair fall and skin problems, plus laser and hair transplant."/>
+<link rel="preload" as="image" href="images/hero-hair-m.jpg" media="(max-width:900px)" fetchpriority="high"><link rel="preload" as="image" href="images/hero-hair.jpg" media="(min-width:901px)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -309,6 +310,10 @@ nav.sc{box-shadow:0 4px 20px rgba(0,0,0,0.07)}
 .hsl-laser{background:linear-gradient(to right,rgba(8,12,20,.85) 0%,rgba(8,12,20,.6) 45%,rgba(8,12,20,.3) 75%,rgba(8,12,20,.15) 100%),url('images/hero-laser.jpg');background-size:cover;background-position:center}
 .hsl-botox{background:linear-gradient(to right,rgba(8,12,20,.82) 0%,rgba(8,12,20,.55) 40%,rgba(8,12,20,.15) 70%,rgba(8,12,20,0) 100%),url('images/hero-botox.jpg');background-size:cover;background-position:center}
 .hsl-main{background:linear-gradient(to right,rgba(8,12,20,.85) 0%,rgba(8,12,20,.6) 45%,rgba(8,12,20,.3) 75%,rgba(8,12,20,.15) 100%),url('images/hero-main.jpg');background-size:cover;background-position:center}
+/* perf: mobile hero images + defer non-active slide images until page load */
+@media(max-width:900px){.hsl-hair{background-image:linear-gradient(to right,rgba(8,12,20,.82) 0%,rgba(8,12,20,.55) 40%,rgba(8,12,20,.15) 70%,rgba(8,12,20,0) 100%),url('images/hero-hair-m.jpg')}.hsl-acne{background-image:linear-gradient(to right,rgba(8,12,20,.82) 0%,rgba(8,12,20,.55) 40%,rgba(8,12,20,.15) 70%,rgba(8,12,20,0) 100%),url('images/hero-acne-m.jpg')}.hsl-laser{background-image:linear-gradient(to right,rgba(8,12,20,.85) 0%,rgba(8,12,20,.6) 45%,rgba(8,12,20,.3) 75%,rgba(8,12,20,.15) 100%),url('images/hero-laser-m.jpg')}.hsl-botox{background-image:linear-gradient(to right,rgba(8,12,20,.82) 0%,rgba(8,12,20,.55) 40%,rgba(8,12,20,.15) 70%,rgba(8,12,20,0) 100%),url('images/hero-botox-m.jpg')}.hsl-main{background-image:linear-gradient(to right,rgba(8,12,20,.85) 0%,rgba(8,12,20,.6) 45%,rgba(8,12,20,.3) 75%,rgba(8,12,20,.15) 100%),url('images/hero-main-m.jpg')}}
+html:not(.pl) .hslide:not(.active) .hbg{background-image:none}
+
 .hsvg{position:absolute;right:60px;top:50%;transform:translateY(-50%);z-index:2;width:380px;height:420px}
 /* ===== Hero decorative layer ===== */
 .hdecor{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -2372,5 +2377,6 @@ function sendWA(){
 })();
 </script>
 <!-- TRUEDERM CHATBOT END -->
+<script>window.addEventListener("load",function(){document.documentElement.classList.add("pl")});</script>
 </body>
 </html>
