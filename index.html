@@ -1580,10 +1580,23 @@ img,video,svg{max-width:100%;height:auto;}
 })();
 </script>
 
-<!-- Load Google Maps Places API -->
-<script async defer 
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVG_NyC2pWkBkysGyZCzLLjDtr_OAsNg&libraries=places&callback=initGoogleReviews"
-  onerror="document.getElementById('reviews-fallback').style.display='grid';document.getElementById('reviews-loading').style.display='none'">
+<!-- Load Google Maps Places API only when the reviews section is near the screen (perf) -->
+<script>
+(function(){
+  var target=document.getElementById('reviews-fallback')||document.getElementById('reviews-loading');
+  function load(){
+    if(load.d)return;load.d=1;
+    var s=document.createElement('script');
+    s.async=true;
+    s.src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVG_NyC2pWkBkysGyZCzLLjDtr_OAsNg&libraries=places&callback=initGoogleReviews";
+    s.onerror=function(){var f=document.getElementById('reviews-fallback'),l=document.getElementById('reviews-loading');if(f)f.style.display='grid';if(l)l.style.display='none';};
+    document.body.appendChild(s);
+  }
+  if(target&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();load();}},{rootMargin:'800px'});
+    io.observe(target);
+  } else { window.addEventListener('load',load); }
+})();
 </script>
 
 
@@ -1778,8 +1791,8 @@ img,video,svg{max-width:100%;height:auto;}
    <div class="fu">
     <div class="map-box">
      <!-- Interactive Google Map -->
-     <iframe
-      src="https://www.google.com/maps?q=Truederm+Jaipur+Bhagadiya+Bhawan+J-26+Subhash+Marg+C-Scheme+Ashok+Nagar+Jaipur&output=embed"
+     <iframe class="lazymap"
+      data-src="https://www.google.com/maps?q=Truederm+Jaipur+Bhagadiya+Bhawan+J-26+Subhash+Marg+C-Scheme+Ashok+Nagar+Jaipur&output=embed"
       width="100%" height="360" style="border:0;display:block" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade" title="Truederm Jaipur Location Map"></iframe>
      <!-- Full Address below map -->
@@ -2384,5 +2397,6 @@ function sendWA(){
 </script>
 <!-- TRUEDERM CHATBOT END -->
 <script>window.addEventListener("load",function(){document.documentElement.classList.add("pl")});</script>
+<script>(function(){var m=document.querySelectorAll('iframe.lazymap');if(!m.length)return;function ld(f){if(!f.src)f.src=f.getAttribute('data-src');}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){ld(e.target);io.unobserve(e.target);}});},{rootMargin:'400px'});m.forEach(function(f){io.observe(f);});}else{m.forEach(ld);}})();</script>
 </body>
 </html>
