@@ -12,7 +12,7 @@
 <html lang="en-IN">
 <head> 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJMHQ34W9K"></script>
+<script>window.addEventListener("load",function(){setTimeout(function(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=G-NJMHQ34W9K";document.head.appendChild(s);},1500);});</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -383,8 +383,8 @@ html:not(.pl) .hslide:not(.active) .hbg{background-image:none}
 .hprev,.hnext{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.12);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.25);color:#fff;width:48px;height:48px;border-radius:50%;font-size:24px;cursor:pointer;display:grid;place-items:center;transition:all .2s}
 .hprev{left:20px}.hnext{right:20px}
 .hprev:hover,.hnext:hover{background:rgba(255,255,255,0.22)}
-.hdots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
-.hdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;border:none;transition:all .3s}
+.hdots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:16px;z-index:10;align-items:center}
+.hdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.55);cursor:pointer;border:none;transition:all .3s;position:relative}.hdot::before{content:"";position:absolute;inset:-9px -6px}
 .hdot.active{background:#fff;width:24px;border-radius:4px}
 
 /* STATSBAR */
@@ -970,6 +970,8 @@ img,video,svg{max-width:100%;height:auto;}
   #hairtransplant .lbl{justify-content:flex-start!important;}
   #hairtransplant .ttl{display:block!important;width:100%!important;}
 }
+:where(img[width][height]){height:auto}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -997,7 +999,7 @@ img,video,svg{max-width:100%;height:auto;}
 <nav id="nb">
  <div class="wrap ni">
   <a href="#hero" class="nlogo">
-   <img src="images/logo-nav.png" alt="Truederm"/>
+   <img width="62" height="62" src="images/logo-nav-sm.png" alt="Truederm logo"/>
    <div>
     <div class="nn">truederm. <span>by <strong>Dr. Iftekhar Khan</strong></span></div>
     <div class="nsb">Skin &nbsp;·&nbsp; Hair &nbsp;·&nbsp; Laser &nbsp;·&nbsp; Aesthetics</div>
@@ -1055,7 +1057,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="htrust"><span class="htb">🎓 <b>AIIMS</b> Trained</span><span class="htb">⭐ <b>4.9</b> Rating</span><span class="htb">✅ <b>100%</b> Natural Results</span></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
-      <img src="images/service-1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Hair transplant and hair loss treatment in Jaipur - Truederm"/>
+      <img width="650" height="650" src="images/service-1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Hair transplant and hair loss treatment in Jaipur - Truederm"/>
     </div>
     </div>
    </div>
@@ -1070,7 +1072,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Consultation</a><a href="#services" class="btn bwh">Explore Treatments</a></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
-      <img src="images/service-2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Acne, pigmentation and scar treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
+      <img width="650" height="871" src="images/service-2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Acne, pigmentation and scar treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
     </div>
     </div>
    </div>
@@ -1085,7 +1087,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Consultation</a><a href="#services" class="btn bwh">View Services</a></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
-      <img src="images/service-3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Laser skin treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
+      <img width="650" height="975" src="images/service-3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Laser skin treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
     </div>
     </div>
    </div>
@@ -1100,7 +1102,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Consultation</a><a href="#services" class="btn bwh">Know More</a></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
-      <img src="images/service-4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Botox and anti-ageing treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
+      <img width="650" height="975" src="images/service-4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Botox and anti-ageing treatment in Jaipur - Truederm" loading="lazy" decoding="async"/>
     </div>
     </div>
    </div>
@@ -1115,7 +1117,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Appointment</a><a href="https://wa.me/918890030202" class="btn bw" target="_blank">💬 WhatsApp Now</a></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
-      <img src="images/service-5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Dr. Iftekhar Khan - AIIMS-trained dermatologist at Truederm, C-Scheme, Jaipur" loading="lazy" decoding="async"/>
+      <img width="650" height="866" src="images/service-5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Dr. Iftekhar Khan - AIIMS-trained dermatologist at Truederm, C-Scheme, Jaipur" loading="lazy" decoding="async"/>
     </div>
     </div>
    </div>
@@ -1125,11 +1127,11 @@ img,video,svg{max-width:100%;height:auto;}
  <button class="hprev" onclick="chH(-1)">&#8249;</button>
  <button class="hnext" onclick="chH(1)">&#8250;</button>
  <div class="hdots">
-  <button class="hdot active" onclick="goH(0)"></button>
-  <button class="hdot" onclick="goH(1)"></button>
-  <button class="hdot" onclick="goH(2)"></button>
-  <button class="hdot" onclick="goH(3)"></button>
-  <button class="hdot" onclick="goH(4)"></button>
+  <button aria-label="Show slide 1" class="hdot active" onclick="goH(0)"></button>
+  <button aria-label="Show slide 2" class="hdot" onclick="goH(1)"></button>
+  <button aria-label="Show slide 3" class="hdot" onclick="goH(2)"></button>
+  <button aria-label="Show slide 4" class="hdot" onclick="goH(3)"></button>
+  <button aria-label="Show slide 5" class="hdot" onclick="goH(4)"></button>
  </div>
 </section>
 
@@ -1150,7 +1152,7 @@ img,video,svg{max-width:100%;height:auto;}
  <div class="wrap">
   <div class="ag">
    <div class="aiw fu">
-    <div class="aimg"><img src="images/about-clinic.jpg" alt="Dr. Iftekhar Khan - AIIMS-trained dermatologist in Jaipur" loading="lazy" decoding="async"/></div>
+    <div class="aimg"><img width="650" height="927" src="images/about-clinic.jpg" alt="Dr. Iftekhar Khan - AIIMS-trained dermatologist in Jaipur" loading="lazy" decoding="async"/></div>
     <div class="atag"><strong>MD</strong><span>Dermatology</span></div>
    </div>
    <div class="fu">
@@ -1255,29 +1257,29 @@ img,video,svg{max-width:100%;height:auto;}
   <div class="csw fu">
    <div class="cslider">
     <div class="cslide active">
-     <img src="images/clinic-waiting-lounge.jpg" alt="Truederm comfortable waiting lounge in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
+     <img width="1000" height="666" src="images/clinic-waiting-lounge.jpg" alt="Truederm comfortable waiting lounge in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
      <div class="cscap">🛋️ Comfortable Waiting Lounge — Premium, air-conditioned waiting area</div>
     </div>
     <div class="cslide">
-     <img src="images/clinic-treatment-room.jpg" alt="Truederm advanced treatment room in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
+     <img width="1000" height="666" src="images/clinic-treatment-room.jpg" alt="Truederm advanced treatment room in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
      <div class="cscap">⚕️ Advanced Treatment Room — State-of-the-art equipment for safe procedures</div>
     </div>
     <div class="cslide">
-     <img src="images/clinic-reception.jpg" alt="Truederm elegant reception lounge in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
+     <img width="1000" height="666" src="images/clinic-reception.jpg" alt="Truederm elegant reception lounge in C-Scheme, Jaipur" loading="lazy" decoding="async"/>
      <div class="cscap">✨ Elegant Reception Lounge — A calm, welcoming space designed for comfort</div>
     </div>
     <div class="cslide">
-     <img src="images/clinic-4.jpg" alt="Truederm skincare product display and reception desk" loading="lazy" decoding="async"/>
+     <img width="1000" height="666" src="images/clinic-4.jpg" alt="Truederm skincare product display and reception desk" loading="lazy" decoding="async"/>
      <div class="cscap">🧴 Curated Skincare Products — Premium dermatology-grade product range</div>
     </div>
    </div>
-   <button class="csb csp" onclick="chC(-1)">&#8249;</button>
-   <button class="csb csn" onclick="chC(1)">&#8250;</button>
+   <button class="csb csp" aria-label="Previous" onclick="chC(-1)">&#8249;</button>
+   <button class="csb csn" aria-label="Next" onclick="chC(1)">&#8250;</button>
    <div class="csdots">
-    <button class="csdot active" onclick="goC(0)"></button>
-    <button class="csdot" onclick="goC(1)"></button>
-    <button class="csdot" onclick="goC(2)"></button>
-    <button class="csdot" onclick="goC(3)"></button>
+    <button class="csdot active" aria-label="Show item 1" onclick="goC(0)"></button>
+    <button class="csdot" aria-label="Show item 2" onclick="goC(1)"></button>
+    <button class="csdot" aria-label="Show item 3" onclick="goC(2)"></button>
+    <button class="csdot" aria-label="Show item 4" onclick="goC(3)"></button>
    </div>
   </div>
  </div>
@@ -1332,56 +1334,56 @@ img,video,svg{max-width:100%;height:auto;}
   </div>
   <div class="bag">
    <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-skin-cancer-surgery.jpg" alt="Skin surgery before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-skin-cancer-surgery.jpg" alt="Skin surgery before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <span class="bac-title">Skin Cancer Surgery</span>
      <span class="bac-tag">Surgery</span>
     </div>
    </a>
    <a class="bac fu" href="dermal-fillers-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-1ml-filler.jpg" alt="Dermal filler before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-1ml-filler.jpg" alt="Dermal filler before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <span class="bac-title">1 ml Filler</span>
      <span class="bac-tag">Aesthetics</span>
     </div>
    </a>
    <a class="bac fu" href="skin-brightening-glutathione-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-glutathione-drip.jpg" alt="Glutathione skin brightening drip therapy results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-glutathione-drip.jpg" alt="Glutathione skin brightening drip therapy results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <span class="bac-title">Glutathione Drip Therapy</span>
      <span class="bac-tag">Skin Brightening</span>
     </div>
    </a>
       <a class="bac fu" href="acne-pigmentation-treatment-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-acne-scar.jpg" alt="Acne scar treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-acne-scar.jpg" alt="Acne scar treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <div class="bac-title">Acne Scar Treatment</div>
      <div class="bac-tag">Before & After</div>
     </div>
    </a>
    <a class="bac fu" href="hair-transplant-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-hair-restoration.jpg" alt="Hair loss and hair transplant before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-hair-restoration.jpg" alt="Hair loss and hair transplant before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <div class="bac-title">Hair Restoration</div>
      <div class="bac-tag">Before & After</div>
     </div>
    </a>
    <a class="bac fu" href="acne-pigmentation-treatment-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-6.jpg" alt="Dark circle treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="600" height="600" src="images/before-after-6.jpg" alt="Dark circle treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <div class="bac-title">Dark Circle Treatment</div>
      <div class="bac-tag">Before & After</div>
     </div>
    </a>
    <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-mole-removal.jpg" alt="Mole removal treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="900" height="720" src="images/before-after-mole-removal.jpg" alt="Mole removal treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <div class="bac-title">Mole Removal</div>
      <div class="bac-tag">Surgery</div>
     </div>
    </a>
    <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img src="images/before-after-xanthelasma.jpg" alt="Xanthelasma removal before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
+    <img width="900" height="600" src="images/before-after-xanthelasma.jpg" alt="Xanthelasma removal before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
     <div class="bac-info">
      <div class="bac-title">Xanthelasma Removal</div>
      <div class="bac-tag">Surgery</div>
@@ -1594,25 +1596,25 @@ img,video,svg{max-width:100%;height:auto;}
    <p class="sub" style="margin:0 auto">Glimpses from the grand opening of Truederm Jaipur - <strong>Dr. Iftekhar Khan</strong>'s premium skin, hair &amp; aesthetic clinic. Thank you to everyone who made the day special.</p>
   </div>
   <div class="gal-grid" id="galGrid">
-   <div class="gal-item" data-i="0"><img src="images/gallery-inauguration-1.jpg" alt="Truederm inauguration - ribbon cutting moment" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="1"><img src="images/gallery-inauguration-2.jpg" alt="Truederm grand opening" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="2"><img src="images/gallery-inauguration-3.jpg" alt="Family at Truederm launch" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="3"><img src="images/gallery-inauguration-4.jpg" alt="Guests at Truederm inauguration" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="4"><img src="images/gallery-inauguration-5.jpg" alt="Founder portrait" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="5"><img src="images/gallery-inauguration-6.jpg" alt="Truederm team and product launch" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="6"><img src="images/gallery-inauguration-7.jpg" alt="Celebrating Truederm opening" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="7"><img src="images/gallery-inauguration-8.jpg" alt="Guests with founder" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="8"><img src="images/gallery-inauguration-9.jpg" alt="Felicitation at Truederm" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="9"><img src="images/gallery-inauguration-10.jpg" alt="Group photo at inauguration" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="10"><img src="images/gallery-inauguration-11.jpg" alt="Friends at Truederm launch" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="11"><img src="images/gallery-inauguration-12.jpg" alt="Truederm photo booth" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="12"><img src="images/gallery-inauguration-13.jpg" alt="Family blessing the clinic" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="13"><img src="images/gallery-inauguration-14.jpg" alt="Conversation at the opening" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="14"><img src="images/gallery-inauguration-15.jpg" alt="Founder with guests" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="15"><img src="images/gallery-inauguration-16.jpg" alt="Welcoming guests" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="16"><img src="images/gallery-inauguration-17.jpg" alt="Truederm grand opening group" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="17"><img src="images/gallery-inauguration-18.jpg" alt="Family at Truederm" loading="lazy" decoding="async"></div>
-   <div class="gal-item" data-i="18"><img src="images/gallery-inauguration-19.jpg" alt="Truederm inauguration guests" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="0"><img width="900" height="599" src="images/gallery-inauguration-1.jpg" alt="Truederm inauguration - ribbon cutting moment" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="1"><img width="900" height="599" src="images/gallery-inauguration-2.jpg" alt="Truederm grand opening" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="2"><img width="900" height="599" src="images/gallery-inauguration-3.jpg" alt="Family at Truederm launch" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="3"><img width="900" height="599" src="images/gallery-inauguration-4.jpg" alt="Guests at Truederm inauguration" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="4"><img width="880" height="1100" src="images/gallery-inauguration-5.jpg" alt="Founder portrait" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="5"><img width="900" height="599" src="images/gallery-inauguration-6.jpg" alt="Truederm team and product launch" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="6"><img width="733" height="1100" src="images/gallery-inauguration-7.jpg" alt="Celebrating Truederm opening" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="7"><img width="900" height="599" src="images/gallery-inauguration-8.jpg" alt="Guests with founder" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="8"><img width="733" height="1100" src="images/gallery-inauguration-9.jpg" alt="Felicitation at Truederm" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="9"><img width="733" height="1100" src="images/gallery-inauguration-10.jpg" alt="Group photo at inauguration" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="10"><img width="733" height="1100" src="images/gallery-inauguration-11.jpg" alt="Friends at Truederm launch" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="11"><img width="733" height="1100" src="images/gallery-inauguration-12.jpg" alt="Truederm photo booth" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="12"><img width="900" height="599" src="images/gallery-inauguration-13.jpg" alt="Family blessing the clinic" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="13"><img width="733" height="1100" src="images/gallery-inauguration-14.jpg" alt="Conversation at the opening" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="14"><img width="733" height="1100" src="images/gallery-inauguration-15.jpg" alt="Founder with guests" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="15"><img width="733" height="1100" src="images/gallery-inauguration-16.jpg" alt="Welcoming guests" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="16"><img width="900" height="599" src="images/gallery-inauguration-17.jpg" alt="Truederm grand opening group" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="17"><img width="733" height="1100" src="images/gallery-inauguration-18.jpg" alt="Family at Truederm" loading="lazy" decoding="async"></div>
+   <div class="gal-item" data-i="18"><img width="900" height="599" src="images/gallery-inauguration-19.jpg" alt="Truederm inauguration guests" loading="lazy" decoding="async"></div>
   </div>
  </div>
 </section>
@@ -1669,8 +1671,9 @@ img,video,svg{max-width:100%;height:auto;}
   </div>
   <div class="ig-widget-wrap reveal-scale">
    <!-- Elfsight Social Feed | Truederm Instagram -->
-   <script src="https://elfsightcdn.com/platform.js" async></script>
+   
    <div class="elfsight-app-3cf906e1-9fe5-43f3-8737-df49747355a7" data-elfsight-app-lazy></div>
+   <script>(function(){var el=document.querySelector('.elfsight-app-3cf906e1-9fe5-43f3-8737-df49747355a7');function go(){if(go.d)return;go.d=1;var s=document.createElement('script');s.src='https://elfsightcdn.com/platform.js';s.async=true;document.body.appendChild(s);}if('IntersectionObserver' in window&&el){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:'600px'});io.observe(el);}else{window.addEventListener('load',go);}})();</script>
   </div>
   <div style="text-align:center;margin-top:36px">
    <a href="https://www.instagram.com/truederm.jaipur/" target="_blank" rel="noopener" class="btn bp">📸 Follow @truederm.jaipur</a>
@@ -1735,10 +1738,10 @@ img,video,svg{max-width:100%;height:auto;}
    <div class="fu">
     <div class="apform">
      <div class="apft" id="apftTitle">Request an Appointment</div><div class="aptabs"><button type="button" class="aptab active" id="tabClinic" onclick="setApMode('clinic')">🏥 Visit Clinic</button><button type="button" class="aptab" id="tabOnline" onclick="setApMode('online')">💻 Online Consult</button></div>
-     <div class="fg"><label>Full Name *</label><input type="text" id="fn" placeholder="Your full name"/></div>
-     <div class="fg"><label>Phone *</label><input type="tel" id="fp" placeholder="+91 XXXXX XXXXX"/></div>
-     <div class="fg"><label>Preferred Date</label><input type="date" id="fd"/></div><div class="fg" id="slotGroup" style="display:none"><label>Preferred Time Slot *</label><select id="fs"><option value="">Select a time slot</option><option>11:00 AM – 12:00 PM</option><option>12:00 PM – 1:00 PM</option><option>1:00 PM – 2:00 PM</option><option>2:00 PM – 3:00 PM</option><option>4:00 PM – 5:00 PM</option><option>5:00 PM – 6:00 PM</option><option>6:00 PM – 7:00 PM</option></select></div><div class="fg" id="modeGroup" style="display:none"><label>Consultation Mode</label><select id="fcm"><option>Video Call (WhatsApp)</option><option>Phone Call</option></select></div>
-     <div class="fg"><label>Concern *</label>
+     <div class="fg"><label for="fn">Full Name *</label><input type="text" id="fn" placeholder="Your full name"/></div>
+     <div class="fg"><label for="fp">Phone *</label><input type="tel" id="fp" placeholder="+91 XXXXX XXXXX"/></div>
+     <div class="fg"><label for="fd">Preferred Date</label><input type="date" id="fd"/></div><div class="fg" id="slotGroup" style="display:none"><label for="fs">Preferred Time Slot *</label><select id="fs"><option value="">Select a time slot</option><option>11:00 AM – 12:00 PM</option><option>12:00 PM – 1:00 PM</option><option>1:00 PM – 2:00 PM</option><option>2:00 PM – 3:00 PM</option><option>4:00 PM – 5:00 PM</option><option>5:00 PM – 6:00 PM</option><option>6:00 PM – 7:00 PM</option></select></div><div class="fg" id="modeGroup" style="display:none"><label>Consultation Mode</label><select id="fcm"><option>Video Call (WhatsApp)</option><option>Phone Call</option></select></div>
+     <div class="fg"><label for="fc">Concern *</label>
       <select id="fc">
        <option value="">Select your concern</option>
        <option>Acne / Pimples</option><option>Acne Scars</option>
@@ -1748,7 +1751,7 @@ img,video,svg{max-width:100%;height:auto;}
        <option>Dark Circles</option><option>Skin Rejuvenation</option><option>Other</option>
       </select>
      </div>
-     <div class="fg"><label>Message (Optional)</label><textarea id="fm" rows="3" placeholder="Tell us more about your concern..."></textarea></div>
+     <div class="fg"><label for="fm">Message (Optional)</label><textarea id="fm" rows="3" placeholder="Tell us more about your concern..."></textarea></div>
      <button class="btn bw" id="apSubmitBtn" style="width:100%;justify-content:center;margin-bottom:10px" onclick="sendWA()">💬 Send via WhatsApp</button>
      <p style="font-size:12px;color:var(--mu);text-align:center">📞 Or call: <a href="tel:+918890030202" style="color:var(--t);font-weight:600">+91 88900 30202</a> / <a href="tel:+918890070202" style="color:var(--t);font-weight:600">88900 70202</a></p>
     </div>
@@ -1844,11 +1847,11 @@ img,video,svg{max-width:100%;height:auto;}
  <div class="wrap">
   <div class="ftg">
    <div>
-    <div class="ftlo"><img src="images/logo-footer.png" alt="Truederm" loading="lazy" decoding="async"/><span class="ftbn">Truederm Jaipur</span></div>
+    <div class="ftlo"><img width="200" height="200" src="images/logo-footer.png" alt="Truederm" loading="lazy" decoding="async"/><span class="ftbn">Truederm Jaipur</span></div>
     <p class="ftp">Advanced dermatology clinic offering expert skin, hair, laser & aesthetic treatments by <strong>Dr. Iftekhar Khan</strong>, MBBS MD Dermatology, AIIMS Delhi.</p>
    </div>
    <div><div class="fth">Quick Links</div><ul class="ftul"><li><a href="#hero">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#hairtransplant">Hair Transplant</a></li><li><a href="#results">Results</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="#appointment">Book</a></li><li><a href="#contact">Contact</a></li></ul></div><div><div class="fth">Our Services</div><ul class="ftul"><li><a href="acne-pigmentation-treatment-jaipur.html">Acne &amp; Pigmentation Treatment</a></li><li><a href="hair-transplant-jaipur.html">Hair Transplant (FUE &amp; DHT)</a></li><li><a href="botox-anti-ageing-jaipur.html">Botox &amp; Anti-Ageing</a></li><li><a href="laser-treatment-jaipur.html">Laser Treatment</a></li><li><a href="dermal-fillers-jaipur.html">Dermal Fillers</a></li><li><a href="minor-skin-surgery-jaipur.html">Minor Skin Surgery</a></li><li><a href="skin-brightening-glutathione-jaipur.html">Skin Brightening</a></li><li><a href="advanced-skin-procedures-jaipur.html">Advanced Skin Procedures</a></li><li><a href="skin-specialist-jaipur.html">Skin Specialist in Jaipur</a></li><li><a href="hair-fall-treatment-jaipur.html">Hair Fall Treatment</a></li><li><a href="dermatologist-near-me-jaipur.html">Areas We Serve</a></li><li><a href="about-dr-iftekhar-khan.html">About Dr. Iftekhar Khan</a></li><li><a href="contact.html">Directions &amp; Contact Info</a></li></ul></div>
-   <div><div class="fth">Contact</div><ul class="ftul"><li><a href="tel:+918890030202">+91 88900 30202</a></li><li><a href="tel:+918890070202">+91 88900 70202</a></li><li><a href="mailto:truederm.jaipur@gmail.com">truederm.jaipur@gmail.com</a></li><li><a href="https://instagram.com/truederm.jaipur" target="_blank">@truederm.jaipur</a></li><li style="color:rgba(255,255,255,0.4);font-size:12px;line-height:1.7">Mon–Sat: 11AM–7PM</li></ul></div>
+   <div><div class="fth">Contact</div><ul class="ftul"><li><a href="tel:+918890030202">+91 88900 30202</a></li><li><a href="tel:+918890070202">+91 88900 70202</a></li><li><a href="mailto:truederm.jaipur@gmail.com">truederm.jaipur@gmail.com</a></li><li><a href="https://instagram.com/truederm.jaipur" target="_blank">@truederm.jaipur</a></li><li style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.7">Mon–Sat: 11AM–7PM</li></ul></div>
   </div>
   <div class="ftbot"><p>© 2025 Truederm Jaipur. All rights reserved.</p><p>Made with ❤️ for <strong>Dr. Iftekhar Khan</strong></p></div>
  </div>
@@ -1860,7 +1863,7 @@ img,video,svg{max-width:100%;height:auto;}
 <script>
 // NAV
 const nb=document.getElementById('nb');
-window.addEventListener('scroll',()=>nb.classList.toggle('sc',scrollY>20));
+window.addEventListener('scroll',()=>nb.classList.toggle('sc',scrollY>20),{passive:true});
 const ham=document.getElementById('ham'),mob=document.getElementById('mob');
 ham.addEventListener('click',()=>mob.classList.add('open'));
 document.getElementById('mobX').addEventListener('click',()=>mob.classList.remove('open'));
@@ -2043,16 +2046,19 @@ function sendWA(){
 (function(){
   const sections = document.querySelectorAll('section[id], div[id]');
   const navLinks = document.querySelectorAll('.nlinks a');
+  let offs=null, tk=false, last=null;
+  const measure=()=>{offs=[].map.call(sections,s=>[s.id,s.offsetTop]);};
+  window.addEventListener('load',measure);window.addEventListener('resize',()=>{offs=null;},{passive:true});
   window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if(window.scrollY >= s.offsetTop - 120) current = s.id;
+    if(tk) return; tk=true;
+    requestAnimationFrame(()=>{
+      tk=false; if(!offs) measure();
+      let current='', y=window.scrollY;
+      for(const [id,t] of offs){ if(y>=t-120) current=id; }
+      if(current===last) return; last=current;
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+current));
     });
-    navLinks.forEach(a => {
-      a.classList.remove('active');
-      if(a.getAttribute('href') === '#' + current) a.classList.add('active');
-    });
-  });
+  },{passive:true});
 
   // ===== RIPPLE on buttons =====
   document.querySelectorAll('.btn').forEach(btn => {
@@ -2165,7 +2171,7 @@ function sendWA(){
   <div class="td-quick" id="td-quick"></div>
   <div class="td-ibar">
     <input type="text" id="td-input" placeholder="Type your question here..." onkeydown="if(event.key==='Enter')tdSend()" autocomplete="off"/>
-    <button class="td-send" onclick="tdSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+    <button class="td-send" aria-label="Send message" onclick="tdSend()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
   </div>
 </div>
 <script>
