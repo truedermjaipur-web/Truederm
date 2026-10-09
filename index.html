@@ -193,7 +193,7 @@
     },
     {
       "@type": "Question",
-      "name": "Is the first consultation free at Truederm?",
+      "name": "How does the first consultation at Truederm work?",
       "acceptedAnswer": {"@type":"Answer","text":"Truederm offers an easy initial consultation where Dr. Iftekhar Khan, AIIMS Delhi-trained dermatologist, assesses your skin or hair concern and recommends a personalised treatment plan with transparent pricing."}
     },
     {
@@ -1053,7 +1053,7 @@ img,video,svg{max-width:100%;height:auto;}
      <div class="htag">🩺 Skin, Hair &amp; Laser Clinic</div>
      <h1 class="hh">Dermatologist in<br><em>C-Scheme, Jaipur</em></h1>
      <p class="hp">Skin, hair and laser treatments by AIIMS-trained dermatologist <strong>Dr. Iftekhar Khan</strong>, including advanced FUE &amp; DHT hair transplant with a natural hairline.</p>
-     <div class="hbtns"><a href="#appointment" class="btn bp">📅 Free Consultation</a><a href="https://wa.me/918890030202" class="btn bw" target="_blank">💬 WhatsApp Now</a></div>
+     <div class="hbtns"><a href="#appointment" class="btn bp">📅 Book Consultation</a><a href="https://wa.me/918890030202" class="btn bw" target="_blank">💬 WhatsApp Now</a></div>
      <div class="htrust"><span class="htb">🎓 <b>AIIMS</b> Trained</span><span class="htb">⭐ <b>4.9</b> Rating</span><span class="htb">✅ <b>100%</b> Natural Results</span></div>
     </div>
     <div class="hsvg" style="overflow:hidden;border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.15);">
@@ -1206,7 +1206,7 @@ img,video,svg{max-width:100%;height:auto;}
      </div>
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-     <a href="#appointment" class="btn bp">📅 Book Free Consultation</a>
+     <a href="#appointment" class="btn bp">📅 Book Consultation</a>
      <a href="https://wa.me/918890030202?text=Hello%2C+I+want+to+know+about+Hair+Transplant+at+Truederm" class="btn bw" target="_blank">💬 Ask on WhatsApp</a>
      <a href="hair-transplant-jaipur.html" class="btn bwh">📖 Full Hair Transplant Guide & FAQs →</a>
     </div>
@@ -1238,7 +1238,7 @@ img,video,svg{max-width:100%;height:auto;}
      </div>
      <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.2);text-align:center">
       <a href="tel:+918890030202" style="color:#fff;font-size:18px;font-weight:700;font-family:var(--hf)">📞 +91 88900 30202 / 88900 70202</a>
-      <div style="font-size:12px;opacity:.8;margin-top:4px">Call for free consultation</div>
+      <div style="font-size:12px;opacity:.8;margin-top:4px">Call to book a consultation</div>
      </div>
     </div>
    </div>
@@ -2198,8 +2198,8 @@ function sendWA(){
   // Knowledge base: keywords -> {sticker, answer, follow (agent follow-up chips)}
   var KB=[
     {k:['hair transplant','fue','dht','hairline','bald','balding','transplant','grafts'],s:'💆',
-     a:'Great choice! Our <strong>Hair Transplant</strong> uses advanced <strong>FUE</strong> &amp; <strong>DHT</strong> techniques for a natural hairline and permanent results — done by an AIIMS-trained dermatologist. ✨<br><br>It starts with a <strong>free consultation</strong> to assess your grafts.',
-     f:['How long does it take?','Is it painful?','Book free consultation']},
+     a:'Great choice! Our <strong>Hair Transplant</strong> uses advanced <strong>FUE</strong> &amp; <strong>DHT</strong> techniques for a natural hairline and permanent results — done by an AIIMS-trained dermatologist. ✨<br><br>It starts with a <strong>consultation</strong> to assess your grafts.',
+     f:['How long does it take?','Is it painful?','Book consultation']},
     {k:['how long','recovery','time take','duration','heal','downtime'],s:'⏱️',
      a:'Most procedures are done in a single sitting, and recovery is quick with minimal downtime. The doctor will share an exact timeline based on your specific case during consultation. 😊',
      f:['Is it painful?','Book consultation']},
@@ -2223,7 +2223,7 @@ function sendWA(){
      f:['How long does Botox last?','Book consultation']},
     {k:['cost','price','charge','fee','how much','kitna','rate','expensive','budget'],s:'💰',
      a:'Pricing depends on the treatment, area and your specific needs — so the doctor gives an exact quote in the consultation. 😊 The good news: the <strong>first consultation is easy to book</strong>!',
-     f:['Book free consultation','See treatments']},
+     f:['Book consultation','See treatments']},
     {k:['book','appointment','consultation','slot','visit','schedule','meet'],s:'📅',
      a:'Wonderful — let\'s get you booked! 📅 Please share a few quick details below and Dr. Khan\'s team will call you back. 😊',
      form:true},
@@ -2331,7 +2331,7 @@ function sendWA(){
     var area=document.getElementById('td-msgs');
     var wrap=document.createElement('div');wrap.className='td-msg bot';
     wrap.innerHTML='<div class="td-bav">Td</div><div><div class="td-lform" id="td-lform">'
-      +'<div class="td-ftitle">📅 Book Your Free Consultation</div>'
+      +'<div class="td-ftitle">📅 Book Your Consultation</div>'
       +'<input type="text" id="td-fn" placeholder="Your Full Name *"/>'
       +'<input type="tel" id="td-fp" placeholder="Phone Number *"/>'
       +'<select id="td-fs"><option value="">-- Select Treatment --</option>'
@@ -2345,7 +2345,7 @@ function sendWA(){
       +'<option>Anti-Ageing / Skin Rejuvenation</option><option>General Dermatology</option>'
       +'<option>Not Sure - Need Advice</option></select>'
       +'<input type="text" id="td-fc" placeholder="Describe your concern (optional)"/>'
-      +'<button class="td-sbtn" onclick="tdSubmit()">Request Free Consultation ✨</button>'
+      +'<button class="td-sbtn" onclick="tdSubmit()">Request Consultation ✨</button>'
       +'</div></div>';
     area.appendChild(wrap);tdScroll();
   }
