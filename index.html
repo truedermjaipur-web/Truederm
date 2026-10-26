@@ -1889,6 +1889,14 @@ img,video,svg{max-width:100%;height:auto;}
 .tdf #apSubmitBtn{width:100%;justify-content:center;font-size:1rem;padding:15px 18px;border-radius:14px}
 .tdf .note{text-align:center;font-size:.86rem;color:var(--mu);margin:12px 0 0}
 .tdf .note a{color:var(--td);font-weight:600;text-decoration:none}
+.tdf .pay{display:none;border:1.5px solid var(--tm);background:var(--off);border-radius:16px;padding:16px;margin:0 0 16px;gap:16px;align-items:center}
+.tdf .pay.show{display:flex}
+.tdf .pay img{width:150px;height:150px;flex:none;border-radius:10px;background:#fff;padding:6px;border:1px solid var(--bo)}
+.tdf .pay h4{font:700 1.05rem var(--hf);color:var(--tx);margin:0 0 6px}
+.tdf .pay p{font-size:.86rem;color:var(--mu);margin:0 0 8px;line-height:1.45}
+.tdf .pay .upi{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 .8rem var(--bf);color:var(--tdeep);word-break:break-all}
+.tdf .pay .upi button,.tdf .pay .upi a{border:1.5px solid var(--t);background:#fff;color:var(--tdeep);border-radius:99px;padding:5px 12px;font:600 .78rem var(--bf);cursor:pointer;text-decoration:none;white-space:nowrap}
+@media (max-width:520px){.tdf .pay.show{flex-direction:column;text-align:center}.tdf .pay img{width:190px;height:190px}.tdf .pay .upi{justify-content:center}}
 @media (max-width:520px){.tdf{padding:24px 18px}.tdf .row2{grid-template-columns:1fr}.tdf .tdf-head span{display:none}}
 </style>
   <div class="tdf-head"><div id="apftTitle" class="apft">Request an Appointment</div><span>Takes 1 minute</span></div>
@@ -1941,6 +1949,17 @@ img,video,svg{max-width:100%;height:auto;}
   </fieldset>
 
   <div class="summary" id="tdfSummary" aria-live="polite">Pick a day to see your booking summary.</div>
+  <div class="pay" id="tdfPay">
+    <img src="images/truederm-upi-qr.png" alt="UPI QR code to pay Truederm by Dr Iftekhar" width="150" height="150" loading="lazy">
+    <div>
+      <h4>Pay for your online consultation</h4>
+      <p>Scan with GPay, PhonePe, Paytm or any UPI app. After paying, send the payment screenshot on WhatsApp so we can confirm your slot.</p>
+      <div class="upi"><span id="tdfUpi">truedermbydriftekhar11150900@aubank</span>
+        <button type="button" onclick="navigator.clipboard&amp;&amp;navigator.clipboard.writeText(document.getElementById('tdfUpi').textContent).then(()=>{this.textContent='Copied ✓'})">Copy UPI ID</button>
+        <a href="images/truederm-upi-qr.png" download="Truederm-UPI-QR.png">Save QR</a>
+      </div>
+    </div>
+  </div>
   <button type="button" id="apSubmitBtn" class="btn bw" onclick="sendWA()">💬 Send via WhatsApp</button>
   <p class="note">📞 Or call: <a href="tel:+918890030202">+91 88900 30202</a> / <a href="tel:+918890070202">88900 70202</a></p>
 <script>
@@ -2171,6 +2190,7 @@ document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
    document.getElementById('tabOnline').classList.toggle('active',mode==='online');
    document.getElementById('slotGroup').style.display=mode==='online'?'block':'none';
      document.getElementById('modeGroup').style.display=mode==='online'?'block':'none';
+     document.getElementById('tdfPay').classList.toggle('show',mode==='online');
      document.getElementById('apftTitle').textContent=mode==='online'?'Book an Online Consultation':'Request an Appointment';
      document.getElementById('apSubmitBtn').innerHTML=mode==='online'?'💻 Book Online Consult via WhatsApp':'💬 Send via WhatsApp';
   }
@@ -2194,7 +2214,8 @@ function sendWA(){
        if(d)txt+=`*Date:* ${d}%0A`;
        txt+=`*Time Slot:* ${encodeURIComponent(s)}%0A*Mode:* ${encodeURIComponent(cm)}%0A`;
        txt+=`*Concern:* ${ec}%0A`;
-       if(m)txt+=`*Message:* ${em}`;
+       if(m)txt+=`*Message:* ${em}%0A`;
+       txt+=`%0AI will pay via UPI (truedermbydriftekhar11150900@aubank) and share the screenshot here.`;
    }else{
        txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
        txt+=`*Name:* ${en}%0A*Phone:* ${ep}%0A`;
