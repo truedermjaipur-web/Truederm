@@ -1324,74 +1324,173 @@ img,video,svg{max-width:100%;height:auto;}
 </section>
 
 <!-- RESULTS -->
+<!-- ============ BEFORE & AFTER (replace the whole <section id="results"> … </section>) ============ -->
 <section id="results">
- <div class="wrap">
-  <div class="cx">
-   <div class="lbl">Real Results</div>
-   <h2 class="ttl">Before & After</h2>
-   <p class="sub">Real patient transformations at Truederm Jaipur.</p>
-   
+<style>
+#results .tdx-car{position:relative;margin-top:38px}
+#results .tdx-track{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 4px 26px;scrollbar-width:none;-ms-overflow-style:none}
+#results .tdx-track::-webkit-scrollbar{display:none}
+#results .tdx-card{flex:0 0 calc((100% - 66px)/4);scroll-snap-align:start;background:#fff;border-radius:var(--r,16px);box-shadow:var(--sh);border:1px solid var(--bo);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.22,.8,.24,1),box-shadow .35s}
+#results .tdx-card:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+#results .tdx-stage{position:relative;aspect-ratio:2/3;overflow:hidden;background:#0d2a2e}
+#results .tdx-stage::before{content:"";position:absolute;inset:-30px;background:var(--img) center/cover;filter:blur(22px) brightness(.55);transform:scale(1.1)}
+#results .tdx-cmp{--p:50%;position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);aspect-ratio:var(--fa,2/3);max-height:100%;margin:auto;overflow:hidden;cursor:ew-resize;user-select:none;-webkit-user-select:none}
+#results .tdx-l{position:absolute;inset:0;background-image:var(--img);background-repeat:no-repeat}
+#results .tdx-after{clip-path:inset(0 0 0 var(--p))}
+#results .tdx-bar{position:absolute;top:0;bottom:0;left:var(--p);width:2px;background:#fff;transform:translateX(-50%);box-shadow:0 0 14px rgba(0,0,0,.4);pointer-events:none;z-index:2}
+#results .tdx-knob{position:absolute;top:50%;left:50%;width:46px;height:46px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);display:grid;place-items:center;color:var(--td);box-shadow:0 8px 22px rgba(0,0,0,.3);transition:transform .25s}
+#results .tdx-knob svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#results .tdx-cmp:hover .tdx-knob{transform:translate(-50%,-50%) scale(1.1)}
+#results .tdx-cmp:focus-within .tdx-knob{box-shadow:0 0 0 4px var(--tm),0 8px 22px rgba(0,0,0,.3)}
+#results .tdx-lbl{position:absolute;top:12px;z-index:2;font:700 .66rem/1 var(--bf);letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:99px;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+#results .tdx-lbl.b{left:12px;background:rgba(17,24,32,.72);color:#fff}
+#results .tdx-lbl.a{right:12px;background:var(--t);color:#fff}
+#results .tdx-cmp.hb .tdx-lbl.b,#results .tdx-cmp.ha .tdx-lbl.a{opacity:0}
+#results .tdx-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:2;background:rgba(17,24,32,.72);backdrop-filter:blur(6px);color:#fff;font:600 .76rem var(--bf);padding:7px 13px;border-radius:99px;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+#results .tdx-cmp.touched .tdx-hint{opacity:0}
+#results .tdx-cmp input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:3}
+#results .tdx-info{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px 18px}
+#results .tdx-title{font:700 1.2rem/1.2 var(--hf);color:var(--tx)}
+#results .tdx-title a{color:inherit;text-decoration:none}
+#results .tdx-title a:hover{color:var(--td)}
+#results .tdx-tag{flex:none;font:600 .72rem var(--bf);color:var(--td);background:var(--tl);border:1px solid var(--tm);padding:5px 10px;border-radius:99px}
+#results .tdx-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px}
+#results .tdx-btn{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--tm);background:#fff;color:var(--tdeep);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+#results .tdx-btn:hover{background:var(--t);border-color:var(--t);color:#fff;transform:scale(1.06)}
+#results .tdx-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#results .tdx-dots{display:flex;gap:8px}
+#results .tdx-dots button{width:9px;height:9px;padding:0;border:0;border-radius:99px;background:var(--tm);cursor:pointer;transition:width .35s,background .35s}
+#results .tdx-dots button.on{width:30px;background:var(--t)}
+@media (max-width:1100px){#results .tdx-card{flex-basis:calc((100% - 44px)/3)}}
+@media (max-width:820px){#results .tdx-card{flex-basis:calc((100% - 22px)/2)}}
+@media (max-width:560px){#results .tdx-card{flex-basis:78%}#results .tdx-track{gap:14px}}
+</style>
+  <div class="wrap">
+    <div class="cx">
+      <div class="lbl reveal">Real Results</div>
+      <h2 class="ttl reveal">Before &amp; After</h2>
+      <p class="sub reveal">Real patient transformations at Truederm Jaipur. Drag the slider on any photo to compare.</p>
+    </div>
+
+    <div class="tdx-car" aria-roledescription="carousel" aria-label="Before and after results">
+      <div class="tdx-track" id="tdxTrack"></div>
+      <div class="tdx-nav">
+        <button type="button" class="tdx-btn" id="tdxPrev" aria-label="Previous results"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <div class="tdx-dots" id="tdxDots"></div>
+        <button type="button" class="tdx-btn" id="tdxNext" aria-label="Next results"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
   </div>
-  <div class="bag">
-   <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-skin-cancer-surgery.jpg" alt="Skin surgery before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <span class="bac-title">Skin Cancer Surgery</span>
-     <span class="bac-tag">Surgery</span>
-    </div>
-   </a>
-   <a class="bac fu" href="dermal-fillers-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-1ml-filler.jpg" alt="Dermal filler before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <span class="bac-title">1 ml Filler</span>
-     <span class="bac-tag">Aesthetics</span>
-    </div>
-   </a>
-   <a class="bac fu" href="skin-brightening-glutathione-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-glutathione-drip.jpg" alt="Glutathione skin brightening drip therapy results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <span class="bac-title">Glutathione Drip Therapy</span>
-     <span class="bac-tag">Skin Brightening</span>
-    </div>
-   </a>
-      <a class="bac fu" href="acne-pigmentation-treatment-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-acne-scar.jpg" alt="Acne scar treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <div class="bac-title">Acne Scar Treatment</div>
-     <div class="bac-tag">Before & After</div>
-    </div>
-   </a>
-   <a class="bac fu" href="hair-transplant-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-hair-restoration.jpg" alt="Hair loss and hair transplant before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <div class="bac-title">Hair Restoration</div>
-     <div class="bac-tag">Before & After</div>
-    </div>
-   </a>
-   <a class="bac fu" href="acne-pigmentation-treatment-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="600" height="600" src="images/before-after-6.jpg" alt="Dark circle treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <div class="bac-title">Dark Circle Treatment</div>
-     <div class="bac-tag">Before & After</div>
-    </div>
-   </a>
-   <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="900" height="720" src="images/before-after-mole-removal.jpg" alt="Mole removal treatment before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <div class="bac-title">Mole Removal</div>
-     <div class="bac-tag">Surgery</div>
-    </div>
-   </a>
-   <a class="bac fu" href="minor-skin-surgery-jaipur.html" style="text-decoration:none;color:inherit;display:block">
-    <img width="900" height="600" src="images/before-after-xanthelasma.jpg" alt="Xanthelasma removal before and after results in Jaipur - Truederm" loading="lazy" decoding="async"/>
-    <div class="bac-info">
-     <div class="bac-title">Xanthelasma Removal</div>
-     <div class="bac-tag">Surgery</div>
-    </div>
-   </a>
-  </div>
- </div>
+<script>
+(function(){
+  /* Each photo already has before + after joined together.
+     split:"h" = side by side, "v" = top / bottom.  parts = number of panels (skin cancer photo has 3).
+     y / x = which part of the photo stays in frame (0–100). */
+  var RESULTS = [
+    {img:"images/before-after-skin-cancer-surgery.jpg", title:"Skin Cancer Surgery", tag:"Surgery", href:"minor-skin-surgery-jaipur.html", split:"h", parts:3, y:35},
+    {img:"images/before-after-1ml-filler.jpg", title:"1 ml Filler", tag:"Aesthetics", href:"dermal-fillers-jaipur.html", split:"h", parts:2, y:45},
+    {img:"images/before-after-glutathione-drip.jpg", title:"Glutathione Drip Therapy", tag:"Skin Brightening", href:"skin-brightening-glutathione-jaipur.html", split:"h", parts:2, y:45},
+    {img:"images/before-after-acne-scar.jpg", title:"Acne Scar Treatment", tag:"Before & After", href:"acne-pigmentation-treatment-jaipur.html", split:"h", parts:2, y:40},
+    {img:"images/before-after-hair-restoration.jpg", title:"Hair Restoration", tag:"Before & After", href:"hair-transplant-jaipur.html", split:"h", parts:2, y:20},
+    {img:"images/before-after-6.jpg", title:"Dark Circle Treatment", tag:"Before & After", href:"acne-pigmentation-treatment-jaipur.html", split:"v", parts:2, x:15, fa:"1.2"},
+    {img:"images/before-after-mole-removal.jpg", title:"Mole Removal", tag:"Surgery", href:"minor-skin-surgery-jaipur.html", split:"h", parts:2, y:40},
+    {img:"images/before-after-xanthelasma.jpg", title:"Xanthelasma Removal", tag:"Surgery", href:"minor-skin-surgery-jaipur.html", split:"v", parts:2, x:50, fa:"1.6"}
+  ];
+  var track = document.getElementById("tdxTrack"), dotsBox = document.getElementById("tdxDots");
+  if(!track) return;
+  var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var knob = '<svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>';
+
+  function layer(r, k, cls){
+    var last = r.parts - 1, s;
+    if(r.split === "h"){
+      s = "background-size:" + (r.parts*100) + "% auto;background-position:" + (k/last*100) + "% " + (r.y==null?50:r.y) + "%";
+    } else {
+      s = "background-size:auto " + (r.parts*100) + "%;background-position:" + (r.x==null?50:r.x) + "% " + (k/last*100) + "%";
+    }
+    return '<div class="tdx-l ' + cls + '" style="' + s + '"></div>';
+  }
+  track.innerHTML = RESULTS.map(function(r){
+    var alt = r.title + " before and after results in Jaipur - Truederm";
+    return '<article class="tdx-card"><div class="tdx-stage" style="--img:url(\'' + r.img + '\')">' +
+      '<div class="tdx-cmp" style="--fa:' + (r.fa || "2/3") + '" role="img" aria-label="' + alt + '">' +
+      layer(r, 0, "tdx-before") + layer(r, r.parts - 1, "tdx-after") +
+      '<span class="tdx-lbl b">Before</span><span class="tdx-lbl a">After</span>' +
+      '<div class="tdx-bar"><span class="tdx-knob">' + knob + '</span></div>' +
+      '<span class="tdx-hint" aria-hidden="true">⟷ Drag to compare</span>' +
+      '<input type="range" min="0" max="100" step="0.1" value="50" aria-label="Compare before and after: ' + r.title + '">' +
+      '</div></div><div class="tdx-info"><span class="tdx-title"><a href="' + r.href + '">' + r.title + '</a></span><span class="tdx-tag">' + r.tag + '</span></div></article>';
+  }).join("");
+
+  function setV(inp){
+    var v = +inp.value, box = inp.parentNode;
+    box.style.setProperty("--p", v + "%");
+    box.classList.toggle("hb", v < 14); box.classList.toggle("ha", v > 86);
+  }
+  function peek(box){
+    if(REDUCE || box._busy || box.classList.contains("touched")) return;
+    var inp = box.querySelector("input"), keys = [50, 22, 78, 50], dur = 2400, t0 = performance.now();
+    box._busy = true;
+    function ease(f){ return f < .5 ? 4*f*f*f : 1 - Math.pow(-2*f + 2, 3)/2; }
+    function step(t){
+      if(box.classList.contains("touched")){ box._busy = false; return; }
+      var p = Math.min(1, (t - t0)/dur), seg = p*3, k = Math.min(2, Math.floor(seg));
+      inp.value = keys[k] + (keys[k+1] - keys[k]) * ease(seg - k); setV(inp);
+      if(p < 1) requestAnimationFrame(step); else box._busy = false;
+    }
+    requestAnimationFrame(step);
+  }
+  var cmps = [].slice.call(track.querySelectorAll(".tdx-cmp"));
+  cmps.forEach(function(box){
+    var inp = box.querySelector("input");
+    inp.addEventListener("input", function(){ setV(inp); });
+    ["pointerdown","touchstart","keydown"].forEach(function(ev){
+      box.addEventListener(ev, function(){ box.classList.add("touched"); hold(); }, {passive:true});
+    });
+    setV(inp);
+  });
+
+  /* carousel */
+  var cards = [].slice.call(track.children), timer = null, paused = false, visible = false, holdT = null;
+  function perView(){ return Math.max(1, Math.round(track.clientWidth / cards[0].getBoundingClientRect().width)); }
+  function pages(){ return Math.max(1, cards.length - perView() + 1); }
+  function current(){ return Math.round(track.scrollLeft / (cards[1].offsetLeft - cards[0].offsetLeft)); }
+  function go(i){
+    var n = pages(); i = (i + n) % n;
+    track.scrollTo({left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: REDUCE ? "auto" : "smooth"});
+  }
+  function drawDots(){
+    var n = pages();
+    dotsBox.innerHTML = Array.apply(null, Array(n)).map(function(_, i){ return '<button type="button" aria-label="Go to result ' + (i+1) + '"></button>'; }).join("");
+    [].forEach.call(dotsBox.children, function(b, i){ b.onclick = function(){ hold(); go(i); }; });
+    markDot();
+  }
+  function markDot(){ var c = Math.min(current(), pages()-1); [].forEach.call(dotsBox.children, function(b, i){ b.classList.toggle("on", i === c); }); }
+  function restart(){
+    clearInterval(timer);
+    if(REDUCE || paused || !visible) return;
+    timer = setInterval(function(){ go(current() + 1); }, 4500);
+  }
+  function hold(){ paused = true; restart(); clearTimeout(holdT); holdT = setTimeout(function(){ paused = false; restart(); }, 10000); }
+  document.getElementById("tdxPrev").onclick = function(){ hold(); go(current() - 1); };
+  document.getElementById("tdxNext").onclick = function(){ hold(); go(current() + 1); };
+  var car = track.parentNode;
+  car.addEventListener("mouseenter", function(){ paused = true; restart(); });
+  car.addEventListener("mouseleave", function(){ paused = false; restart(); });
+  var st; track.addEventListener("scroll", function(){ clearTimeout(st); st = setTimeout(function(){ markDot(); peekVisible(); }, 120); }, {passive:true});
+  window.addEventListener("resize", drawDots);
+  function peekVisible(){
+    var tr = track.getBoundingClientRect();
+    cmps.forEach(function(b){ var r = b.getBoundingClientRect(); if(r.left >= tr.left - 4 && r.right <= tr.right + 4) setTimeout(function(){ peek(b); }, 250); });
+  }
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; restart(); if(visible) peekVisible(); }, {threshold:.35}).observe(car);
+  } else { visible = true; restart(); }
+  drawDots();
+})();
+</script>
 </section>
+<!-- ============ END BEFORE & AFTER ============ -->
 
 <!-- REVIEWS -->
 <section id="reviews" style="background:#fff;padding:88px 0">
@@ -1749,25 +1848,158 @@ img,video,svg{max-width:100%;height:auto;}
     <div class="ci"><div class="ciic">🕐</div><div class="citx"><strong>Timing</strong><span>Mon–Sat: 11:00 AM – 7:00 PM<br>Sunday: By Appointment</span></div></div>
    </div>
    <div class="fu">
-    <div class="apform">
-     <div class="apft" id="apftTitle">Request an Appointment</div><div class="aptabs"><button type="button" class="aptab active" id="tabClinic" onclick="setApMode('clinic')">🏥 Visit Clinic</button><button type="button" class="aptab" id="tabOnline" onclick="setApMode('online')">💻 Online Consult</button></div>
-     <div class="fg"><label for="fn">Full Name *</label><input type="text" id="fn" placeholder="Your full name"/></div>
-     <div class="fg"><label for="fp">Phone *</label><input type="tel" id="fp" placeholder="+91 XXXXX XXXXX"/></div>
-     <div class="fg"><label for="fd">Preferred Date</label><input type="date" id="fd"/></div><div class="fg" id="slotGroup" style="display:none"><label for="fs">Preferred Time Slot *</label><select id="fs"><option value="">Select a time slot</option><option>11:00 AM – 12:00 PM</option><option>12:00 PM – 1:00 PM</option><option>1:00 PM – 2:00 PM</option><option>2:00 PM – 3:00 PM</option><option>4:00 PM – 5:00 PM</option><option>5:00 PM – 6:00 PM</option><option>6:00 PM – 7:00 PM</option></select></div><div class="fg" id="modeGroup" style="display:none"><label>Consultation Mode</label><select id="fcm"><option>Video Call (WhatsApp)</option><option>Phone Call</option></select></div>
-     <div class="fg"><label for="fc">Concern *</label>
-      <select id="fc">
-       <option value="">Select your concern</option>
-       <option>Acne / Pimples</option><option>Acne Scars</option>
-       <option>Pigmentation / Dark Spots</option><option>Hair Loss</option>
-       <option>Hair Transplant</option><option>Laser Treatment</option>
-       <option>Botox / Anti-Ageing</option><option>Skin Allergy</option>
-       <option>Dark Circles</option><option>Skin Rejuvenation</option><option>Other</option>
-      </select>
-     </div>
-     <div class="fg"><label for="fm">Message (Optional)</label><textarea id="fm" rows="3" placeholder="Tell us more about your concern..."></textarea></div>
-     <button class="btn bw" id="apSubmitBtn" style="width:100%;justify-content:center;margin-bottom:10px" onclick="sendWA()">💬 Send via WhatsApp</button>
-     <p style="font-size:12px;color:var(--mu);text-align:center">📞 Or call: <a href="tel:+918890030202" style="color:var(--t);font-weight:600">+91 88900 30202</a> / <a href="tel:+918890070202" style="color:var(--t);font-weight:600">88900 70202</a></p>
+<!-- ============ APPOINTMENT FORM (replace the whole <div class="apform"> … </div> inside #appointment) ============ -->
+<div class="apform tdf">
+<style>
+#appointment .aptg > *{min-width:0}
+.tdf{background:#fff;border-radius:22px;padding:30px 28px;box-shadow:0 24px 60px -24px rgba(15,95,104,.45);border:1px solid var(--bo);min-width:0}
+.tdf .tdf-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--bo);padding-bottom:14px;margin-bottom:18px}
+.tdf .apft{font:700 1.65rem/1.15 var(--hf);color:var(--tx);margin:0}
+.tdf .tdf-head span{color:var(--mu);font-size:.85rem;white-space:nowrap}
+.tdf .aptabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--tl);border-radius:14px;padding:5px;margin-bottom:22px}
+.tdf .aptab{border:0;background:transparent;border-radius:10px;padding:11px 8px;font:600 .92rem var(--bf);color:var(--tdeep);cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.tdf .aptab.active{background:var(--t);color:#fff;box-shadow:0 8px 18px -8px rgba(42,172,184,.8)}
+.tdf fieldset{border:0;padding:0;margin:0 0 20px;min-width:0}
+.tdf legend{display:flex;align-items:center;gap:10px;font:700 1.15rem var(--hf);color:var(--tx);margin-bottom:12px;padding:0}
+.tdf .stepn{width:26px;height:26px;border-radius:50%;background:var(--t);color:#fff;font:700 .82rem/26px var(--bf);text-align:center;flex:none}
+.tdf .fg{margin-bottom:14px}
+.tdf label.l{display:block;font:600 .78rem var(--bf);letter-spacing:.06em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
+.tdf input,.tdf select,.tdf textarea{width:100%;font:400 .98rem var(--bf);color:var(--tx);padding:12px 14px;border:1.5px solid var(--bo);border-radius:12px;background:var(--off);transition:border-color .2s,box-shadow .2s,background .2s;box-sizing:border-box}
+.tdf input:focus,.tdf select:focus,.tdf textarea:focus{outline:0;border-color:var(--t);background:#fff;box-shadow:0 0 0 4px var(--tl)}
+.tdf textarea{min-height:84px;resize:vertical}
+.tdf .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tdf .vh{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;border:0!important}
+.tdf .days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.tdf .day{flex:0 0 70px;scroll-snap-align:start;border:1.5px solid var(--bo);background:#fff;border-radius:14px;padding:8px 4px;text-align:center;cursor:pointer;color:var(--tx);font-family:var(--bf);transition:border-color .2s,background .2s,transform .2s}
+.tdf .day:hover{border-color:var(--t);transform:translateY(-2px)}
+.tdf .day small{display:block;font-size:.7rem;color:var(--mu);line-height:1.3}
+.tdf .day b{display:block;font:700 1.45rem/1.15 var(--hf)}
+.tdf .day[aria-pressed="true"]{background:var(--t);border-color:var(--t);box-shadow:0 8px 18px -8px rgba(42,172,184,.8)}
+.tdf .day[aria-pressed="true"] *{color:#fff}
+.tdf .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.tdf .slot{border:1.5px solid var(--bo);background:#fff;border-radius:11px;padding:10px 6px;font:500 .84rem var(--bf);color:var(--tx);cursor:pointer;transition:border-color .2s,background .2s}
+.tdf .slot:hover{border-color:var(--t)}
+.tdf .slot[aria-pressed="true"]{background:var(--tdeep);border-color:var(--tdeep);color:#fff;font-weight:600}
+.tdf .slot:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.tdf .seg{display:flex;gap:8px;flex-wrap:wrap}
+.tdf .seg button{border:1.5px solid var(--bo);background:#fff;border-radius:99px;padding:9px 16px;font:500 .9rem var(--bf);color:var(--tx);cursor:pointer}
+.tdf .seg button[aria-pressed="true"]{background:var(--tx);border-color:var(--tx);color:#fff}
+.tdf .summary{background:var(--tl);border:1px dashed var(--tm);border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--tdeep);margin:4px 0 16px}
+.tdf .summary b{color:var(--tx)}
+.tdf #apSubmitBtn{width:100%;justify-content:center;font-size:1rem;padding:15px 18px;border-radius:14px}
+.tdf .note{text-align:center;font-size:.86rem;color:var(--mu);margin:12px 0 0}
+.tdf .note a{color:var(--td);font-weight:600;text-decoration:none}
+@media (max-width:520px){.tdf{padding:24px 18px}.tdf .row2{grid-template-columns:1fr}.tdf .tdf-head span{display:none}}
+</style>
+  <div class="tdf-head"><div id="apftTitle" class="apft">Request an Appointment</div><span>Takes 1 minute</span></div>
+
+  <div class="aptabs">
+    <button type="button" id="tabClinic" class="aptab active" onclick="setApMode('clinic');tdfSum()">🏥 Visit Clinic</button>
+    <button type="button" id="tabOnline" class="aptab" onclick="setApMode('online');tdfSum()">💻 Online Consult</button>
+  </div>
+
+  <fieldset>
+    <legend><span class="stepn">1</span>Your details</legend>
+    <div class="row2">
+      <div class="fg"><label class="l" for="fn">Full Name *</label><input id="fn" type="text" placeholder="Your full name" autocomplete="name"></div>
+      <div class="fg"><label class="l" for="fp">Phone *</label><input id="fp" type="tel" placeholder="+91 XXXXX XXXXX" autocomplete="tel" inputmode="tel"></div>
     </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="stepn">2</span>Pick a day &amp; time</legend>
+    <div class="fg">
+      <label class="l">Preferred Date</label>
+      <input id="fd" type="date" class="vh" tabindex="-1" aria-hidden="true">
+      <div class="days" id="tdfDays" role="group" aria-label="Choose a date"></div>
+    </div>
+    <div class="fg" id="slotGroup" style="display:none">
+      <label class="l">Preferred Time Slot *</label>
+      <select id="fs" class="vh" tabindex="-1" aria-hidden="true">
+        <option value="">Select a time slot</option>
+        <option>11:00 AM – 12:00 PM</option><option>12:00 PM – 1:00 PM</option><option>1:00 PM – 2:00 PM</option><option>2:00 PM – 3:00 PM</option>
+        <option>4:00 PM – 5:00 PM</option><option>5:00 PM – 6:00 PM</option><option>6:00 PM – 7:00 PM</option>
+      </select>
+      <div class="slots" id="tdfSlots" role="group" aria-label="Choose a time slot"></div>
+    </div>
+    <div class="fg" id="modeGroup" style="display:none">
+      <label class="l">Consultation Mode</label>
+      <select id="fcm" class="vh" tabindex="-1" aria-hidden="true"><option>Video Call (WhatsApp)</option><option>Phone Call</option></select>
+      <div class="seg" id="tdfMode"><button type="button" aria-pressed="true" data-v="Video Call (WhatsApp)">📹 Video call</button><button type="button" aria-pressed="false" data-v="Phone Call">📞 Phone call</button></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><span class="stepn">3</span>Your concern</legend>
+    <div class="fg"><label class="l" for="fc">Concern *</label>
+      <select id="fc">
+        <option value="">Select your concern</option>
+        <option>Acne / Pimples</option><option>Acne Scars</option><option>Pigmentation / Dark Spots</option><option>Hair Loss</option><option>Hair Transplant</option><option>Laser Treatment</option><option>Botox / Anti-Ageing</option><option>Skin Allergy</option><option>Dark Circles</option><option>Skin Rejuvenation</option><option>Other</option>
+      </select>
+    </div>
+    <div class="fg"><label class="l" for="fm">Message (Optional)</label><textarea id="fm" placeholder="Tell us more about your concern..."></textarea></div>
+  </fieldset>
+
+  <div class="summary" id="tdfSummary" aria-live="polite">Pick a day to see your booking summary.</div>
+  <button type="button" id="apSubmitBtn" class="btn bw" onclick="sendWA()">💬 Send via WhatsApp</button>
+  <p class="note">📞 Or call: <a href="tel:+918890030202">+91 88900 30202</a> / <a href="tel:+918890070202">88900 70202</a></p>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var fd = $("fd"), fs = $("fs"), fcm = $("fcm"), daysBox = $("tdfDays"), slotsBox = $("tdfSlots");
+  if(!daysBox) return;
+  var pad = function(n){ return (n < 10 ? "0" : "") + n; };
+  var iso = function(d){ return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()); };
+  var today = new Date(); today.setHours(0,0,0,0);
+  var list = []; for(var i = 0; i < 14; i++){ var d = new Date(today); d.setDate(d.getDate() + i); list.push(d); }
+  fd.min = iso(today);
+  daysBox.innerHTML = list.map(function(d, i){
+    var sun = d.getDay() === 0;
+    var top = i === 0 ? "Today" : i === 1 ? "Tomorrow" : d.toLocaleDateString("en-IN", {weekday:"short"});
+    return '<button type="button" class="day" aria-pressed="false" data-d="' + iso(d) + '"><small>' + top + '</small><b>' + d.getDate() + '</b><small>' + (sun ? "By appt." : d.toLocaleDateString("en-IN", {month:"short"})) + '</small></button>';
+  }).join("");
+  daysBox.addEventListener("click", function(e){
+    var b = e.target.closest(".day"); if(!b) return;
+    [].forEach.call(daysBox.children, function(x){ x.setAttribute("aria-pressed", x === b); });
+    fd.value = b.dataset.d; drawSlots(); tdfSum();
+  });
+  function startHour(t){ var m = t.match(/(\d+):(\d+)\s*(AM|PM)/); if(!m) return 0; var h = +m[1] % 12; if(m[3] === "PM") h += 12; return h; }
+  function drawSlots(){
+    var isToday = fd.value === iso(today), now = new Date().getHours();
+    slotsBox.innerHTML = [].slice.call(fs.options, 1).map(function(o){
+      var past = isToday && startHour(o.value) <= now;
+      if(past && fs.value === o.value) fs.value = "";
+      return '<button type="button" class="slot" aria-pressed="' + (fs.value === o.value) + '" data-v="' + o.value + '"' + (past ? " disabled" : "") + '>' + o.value.replace(/:00/g, "") + '</button>';
+    }).join("");
+  }
+  slotsBox.addEventListener("click", function(e){
+    var b = e.target.closest(".slot"); if(!b || b.disabled) return;
+    fs.value = b.dataset.v;
+    [].forEach.call(slotsBox.children, function(x){ x.setAttribute("aria-pressed", x === b); });
+    tdfSum();
+  });
+  $("tdfMode").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    fcm.value = b.dataset.v;
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b); });
+    tdfSum();
+  });
+  window.tdfSum = function(){
+    var online = $("tabOnline").classList.contains("active"), parts = [];
+    parts.push(online ? "💻 Online consult" + (fcm.value ? " (" + fcm.value.replace(" (WhatsApp)", "") + ")" : "") : "🏥 Clinic visit");
+    if(fd.value){ var d = new Date(fd.value + "T00:00"); parts.push("<b>" + d.toLocaleDateString("en-IN", {weekday:"short", day:"numeric", month:"short"}) + "</b>"); }
+    if(online && fs.value) parts.push("<b>" + fs.value + "</b>");
+    if($("fc").value) parts.push($("fc").value);
+    $("tdfSummary").innerHTML = fd.value ? parts.join(" · ") : "Pick a day to see your booking summary.";
+  };
+  $("fc").addEventListener("change", tdfSum);
+  drawSlots();
+  /* pre-select the first open day */
+  var first = daysBox.querySelector('.day'); if(first) first.click();
+})();
+</script>
+</div>
+<!-- ============ END APPOINTMENT FORM ============ -->
    </div>
   </div>
  </div>
