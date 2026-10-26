@@ -1892,6 +1892,9 @@ img,video,svg{max-width:100%;height:auto;}
 .tdf .pay{display:none;border:1.5px solid var(--tm);background:var(--off);border-radius:16px;padding:16px;margin:0 0 16px;gap:16px;align-items:center}
 .tdf .pay.show{display:flex}
 .tdf .pay img{width:150px;height:150px;flex:none;border-radius:10px;background:#fff;padding:6px;border:1px solid var(--bo)}
+.tdf .pay .fee{display:inline-block;background:var(--tl);color:var(--tdeep);border:1px solid var(--tm);border-radius:99px;padding:4px 12px;font:600 .9rem var(--bf);margin:0 0 8px}
+.tdf .pay .sent{display:none;background:#E8F5E9;color:#1B5E20;border-radius:10px;padding:8px 10px;font-size:.84rem;margin:0 0 8px}
+.tdf .pay .sent.show{display:block}
 .tdf .pay h4{font:700 1.05rem var(--hf);color:var(--tx);margin:0 0 6px}
 .tdf .pay p{font-size:.86rem;color:var(--mu);margin:0 0 8px;line-height:1.45}
 .tdf .pay .upi{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 .8rem var(--bf);color:var(--tdeep);word-break:break-all}
@@ -1953,10 +1956,12 @@ img,video,svg{max-width:100%;height:auto;}
     <img src="images/truederm-upi-qr.png" alt="UPI QR code to pay Truederm by Dr Iftekhar" width="150" height="150" loading="lazy">
     <div>
       <h4>Pay for your online consultation</h4>
+      <div class="fee">Consultation Fee: <strong>₹500</strong></div>
+      <p class="sent" id="tdfSent">✅ We have also sent this QR to your WhatsApp.</p>
       <p>Scan with GPay, PhonePe, Paytm or any UPI app. After paying, send the payment screenshot on WhatsApp so we can confirm your slot.</p>
       <div class="upi"><span id="tdfUpi">truedermbydriftekhar11150900@aubank</span>
         <button type="button" onclick="navigator.clipboard&amp;&amp;navigator.clipboard.writeText(document.getElementById('tdfUpi').textContent).then(()=>{this.textContent='Copied ✓'})">Copy UPI ID</button>
-        <a href="images/truederm-upi-qr.png" download="Truederm-UPI-QR.png">Save QR</a>
+        <a href="images/truederm-consult-fee-qr.jpg" download="Truederm-Consultation-Fee-QR.jpg">Save QR</a>
       </div>
     </div>
   </div>
@@ -2194,6 +2199,24 @@ document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
      document.getElementById('apftTitle').textContent=mode==='online'?'Book an Online Consultation':'Request an Appointment';
      document.getElementById('apSubmitBtn').innerHTML=mode==='online'?'💻 Book Online Consult via WhatsApp':'💬 Send via WhatsApp';
   }
+// Auto-send payment QR to patient's WhatsApp (via Supabase Edge Function + AiSensy).
+// Leave QR_ENDPOINT empty to disable; the QR is always shown on screen anyway.
+const QR_ENDPOINT='';
+function sendPaymentQR(data){
+  if(!QR_ENDPOINT)return;
+  try{
+    fetch(QR_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(r=>r.ok?r.json():null).then(j=>{if(j&&j.ok)document.getElementById('tdfSent').classList.add('show');}).catch(()=>{});
+  }catch(e){}
+}
+// Shareable link: truederm.co.in/#online-consult opens the form in Online Consult mode
+function openOnlineFromLink(){
+  if(!/^#(online|online-consult|consult)$/i.test(location.hash))return;
+  setApMode('online'); if(typeof tdfSum==='function')tdfSum();
+  const el=document.getElementById('appointment'); if(el)setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),300);
+}
+window.addEventListener('DOMContentLoaded',openOnlineFromLink);
+window.addEventListener('hashchange',openOnlineFromLink);
 function sendWA(){
   const n=document.getElementById('fn').value.trim();
    const p=document.getElementById('fp').value.trim();
@@ -2215,7 +2238,9 @@ function sendWA(){
        txt+=`*Time Slot:* ${encodeURIComponent(s)}%0A*Mode:* ${encodeURIComponent(cm)}%0A`;
        txt+=`*Concern:* ${ec}%0A`;
        if(m)txt+=`*Message:* ${em}%0A`;
-       txt+=`%0AI will pay via UPI (truedermbydriftekhar11150900@aubank) and share the screenshot here.`;
+       txt+=`*Consultation Fee:* ₹500%0A`;
+       txt+=`%0AI will pay ₹500 via UPI (truedermbydriftekhar11150900@aubank) and share the screenshot here.`;
+       sendPaymentQR({name:n,phone:p,date:d,slot:s,mode:cm,concern:c});
    }else{
        txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
        txt+=`*Name:* ${en}%0A*Phone:* ${ep}%0A`;
