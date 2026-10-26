@@ -2239,7 +2239,8 @@ function sendWA(){
        txt+=`*Concern:* ${ec}%0A`;
        if(m)txt+=`*Message:* ${em}%0A`;
        txt+=`*Consultation Fee:* ₹500%0A`;
-       txt+=`%0AI will pay ₹500 via UPI (truedermbydriftekhar11150900@aubank) and share the screenshot here.`;
+       txt+=`%0A*Pay ₹500 here (tap):* ${encodeURIComponent('https://truederm.co.in/pay')}%0A`;
+       txt+=`%0AI will pay ₹500 and share the screenshot here.`;
        sendPaymentQR({name:n,phone:p,date:d,slot:s,mode:cm,concern:c});
    }else{
        txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
