@@ -1953,16 +1953,10 @@ img,video,svg{max-width:100%;height:auto;}
 
   <div class="summary" id="tdfSummary" aria-live="polite">Pick a day to see your booking summary.</div>
   <div class="pay" id="tdfPay">
-    <img src="images/truederm-upi-qr.png" alt="UPI QR code to pay Truederm by Dr Iftekhar" width="150" height="150" loading="lazy">
     <div>
-      <h4>Pay for your online consultation</h4>
+      <h4>Online consultation</h4>
       <div class="fee">Consultation Fee: <strong>₹500</strong></div>
-      <p class="sent" id="tdfSent">✅ We have also sent this QR to your WhatsApp.</p>
-      <p>Scan with GPay, PhonePe, Paytm or any UPI app. After paying, send the payment screenshot on WhatsApp so we can confirm your slot.</p>
-      <div class="upi"><span id="tdfUpi">truedermbydriftekhar11150900@aubank</span>
-        <button type="button" onclick="navigator.clipboard&amp;&amp;navigator.clipboard.writeText(document.getElementById('tdfUpi').textContent).then(()=>{this.textContent='Copied ✓'})">Copy UPI ID</button>
-        <a href="images/truederm-consult-fee-qr.jpg" download="Truederm-Consultation-Fee-QR.jpg">Save QR</a>
-      </div>
+      <p>Tap the button below to send your details on WhatsApp. Our team will reply there with the payment QR for ₹500 and confirm your slot once payment is received.</p>
     </div>
   </div>
   <button type="button" id="apSubmitBtn" class="btn bw" onclick="sendWA()">💬 Send via WhatsApp</button>
@@ -2239,9 +2233,7 @@ function sendWA(){
        txt+=`*Concern:* ${ec}%0A`;
        if(m)txt+=`*Message:* ${em}%0A`;
        txt+=`*Consultation Fee:* ₹500%0A`;
-       txt+=`%0A*Pay ₹500 here (tap):* ${encodeURIComponent('https://truederm.co.in/pay')}%0A`;
-       txt+=`%0AI will pay ₹500 and share the screenshot here.`;
-       sendPaymentQR({name:n,phone:p,date:d,slot:s,mode:cm,concern:c});
+       txt+=`%0APlease share the payment QR for ₹500.`;
    }else{
        txt=`Hello Truederm! I want to book an appointment.%0A%0A`;
        txt+=`*Name:* ${en}%0A*Phone:* ${ep}%0A`;
