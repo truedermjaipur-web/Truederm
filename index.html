@@ -973,6 +973,16 @@ img,video,svg{max-width:100%;height:auto;}
 :where(img[width][height]){height:auto}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
+<!-- Keep scroll-snap off until first user interaction so the load-time snap scroll doesn't stop Chrome's LCP measurement -->
+<style>
+html:not(.snap-on) .tdx-track,
+html:not(.snap-on) #tdfDays { scroll-snap-type: none !important; }
+</style>
+<script>
+['pointerdown','touchstart','wheel','keydown'].forEach(function(e){
+  addEventListener(e, function(){ document.documentElement.classList.add('snap-on'); }, {once:true, passive:true});
+});
+</script>
 </head>
 <body>
 
